@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { useEffect, useState } from "react"
-import { RxArrowUp } from "react-icons/rx"
+import { useState } from 'react'
+import { RxArrowUp } from 'react-icons/rx'
 
 export default function GoToTop() {
   const [scroll, setScroll] = useState(0)
@@ -14,7 +14,7 @@ export default function GoToTop() {
   return (
     <button
       onClick={() => window.scrollTo(0, 0)}
-      className={`${scroll > 150 ? "opacity-100" : "opacity-0"} transition-all fixed bg-orange-400 p-2 bottom-2 right-2 rounded-xl border-2 border-white shadow-lg`}
+      className={`${scroll > 150 ? 'opacity-100' : 'opacity-0'} transition-all fixed bg-orange-400 p-2 bottom-2 right-2 rounded-xl border-2 border-white shadow-lg`}
     >
       <RxArrowUp className="text-3xl" />
     </button>
