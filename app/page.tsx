@@ -8,7 +8,10 @@ export default function Home() {
     <main className="h-screen">
       <div className="bg-gradient-to-br text-white gap-4 flex-col items-center justify-center from-sky-500 p-4 to-blue-950 flex flex-1 h-full">
         <span className="text-3xl md:text-6xl lg:text-8xl text-center font-bold drop-shadow-2xl">
-          AS MELHORES FÉRIAS DA SUA VIDA!
+          AS MELHORES FÉRIAS
+        </span>
+        <span className="text-3xl md:text-6xl lg:text-8xl text-center font-bold drop-shadow-2xl">
+          DA SUA VIDA!
         </span>
         <span className="font-semibold">É IMPOSSÍVEL DESCREVER!</span>
         <div className="flex gap-4 items-center">
