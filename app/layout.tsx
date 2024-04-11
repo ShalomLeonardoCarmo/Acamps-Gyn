@@ -5,6 +5,8 @@ import AcampsLogo from "@/public/acamps.webp";
 import Image from "next/image";
 import HeaderMenu from "@/components/menu";
 import Link from "next/link";
+import impossivelDescrever from "@/public/AcampsArt.png"
+import GoToTop from "@/components/button";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
 
@@ -21,13 +23,21 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={quicksand.className}>
-        <header className="w-full flex p-2 md-p-1 gap-10 bg-zinc-100">
-          <Link href="/">
-            <Image src={AcampsLogo} alt="Acamps" />
-          </Link>
+        <header className="w-full flex flex-col p-2 md-p-1 gap-2 divide-y bg-slate-950">
+          <div className="flex items-center justify-center">
+            <Link href="/">
+              <Image src={AcampsLogo} alt="Acamps" className="min-w-14 min-h-14 md:w-20 md:h-20 lg:w-28 lg:h-28" />
+            </Link>
+            <Image
+              alt="Impossível Descrever"
+              src={impossivelDescrever}
+              className="max-h-14 md:max-h-20 lg:max-h-28 w-auto"
+            />
+          </div>
           <HeaderMenu />
         </header>
         {children}
+        <GoToTop />
       </body>
     </html>
   );
