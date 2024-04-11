@@ -1,15 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RxArrowUp } from 'react-icons/rx'
 
 export default function GoToTop() {
   const [scroll, setScroll] = useState(0)
 
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY
-    setScroll(scrolled)
-  })
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY
+      setScroll(scrolled)
+    })
+  }, [])
 
   return (
     <button
