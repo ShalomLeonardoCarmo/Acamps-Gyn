@@ -1,25 +1,37 @@
-'use client'
-import { AboutSection } from '@/components/sections'
-import Tooltip from '@/components/tootlip'
 import Link from 'next/link'
-import { useEffect } from 'react'
-import { FaWhatsapp, FaInstagram } from 'react-icons/fa'
+
 import { IoMdMail } from 'react-icons/io'
+import { FaWhatsapp, FaInstagram } from 'react-icons/fa'
+
+import Tooltip from '@/components/tootlip'
+import { AboutSection } from '@/components/sections'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Acamp's Gyn • É Impossível Descrever",
+  openGraph: {
+    alternateLocale: 'Goiânia/GO - Jardim América',
+    countryName: 'Brasil',
+    determiner: 'auto',
+    locale: 'Goiânia/GO - Jardim América',
+    title: "Acamp's Gyn • É Impossível Descrever",
+    url: 'https://acampsgyn.vercel.app',
+    images: ['/acamps.webp'],
+    emails: 'juventudegoiania@comshalom.org',
+    phoneNumbers: '(62) 3609-5354',
+    siteName: "Acamp's Gyn",
+    type: 'website',
+    description:
+      'As melhores férias da sua vida! É impossível descrever! Vem viver essa experiência com a gente.',
+  },
+}
 
 export default function Home() {
-  useEffect(() => {
-    const gradient = document.getElementById('gradient')
-    setTimeout(() => {
-      gradient?.classList.add('bg-gradient-to-tr')
-      gradient?.classList.remove('bg-gradient-to-br')
-    }, 1000)
-  }, [])
-
   return (
     <main className="h-screen">
       <div
         id="gradient"
-        className="bg-gradient-to-br animate-bgRotate bg-400 text-white gap-4 flex-col items-center justify-center from-sky-500 p-4 to-blue-950 flex flex-1 h-full"
+        className="bg-gradient-to-tr animate-bgRotate bg-400 text-white gap-4 flex-col items-center justify-center from-sky-500 p-4 to-blue-950 flex flex-1 h-full"
       >
         <h1 className="text-3xl md:text-6xl lg:text-8xl text-center font-bold drop-shadow-2xl">
           AS MELHORES FÉRIAS
