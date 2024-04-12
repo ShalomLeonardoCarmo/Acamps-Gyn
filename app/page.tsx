@@ -1,12 +1,24 @@
+'use client'
 import Link from 'next/link'
+import { useEffect } from 'react'
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa'
-import pjj from '@/public/PJJ.png'
-import Image from 'next/image'
+import { IoMdMail } from 'react-icons/io'
 
 export default function Home() {
+  useEffect(() => {
+    const gradient = document.getElementById('gradient')
+    setTimeout(() => {
+      gradient?.classList.add('bg-gradient-to-tr')
+      gradient?.classList.remove('bg-gradient-to-br')
+    }, 1000)
+  }, [])
+
   return (
     <main className="h-screen">
-      <div className="bg-gradient-to-br text-white gap-4 flex-col items-center justify-center from-sky-500 p-4 to-blue-950 flex flex-1 h-full">
+      <div
+        id="gradient"
+        className="bg-gradient-to-br text-white gap-4 flex-col items-center justify-center from-sky-500 p-4 to-blue-950 flex flex-1 h-full"
+      >
         <span className="text-3xl md:text-6xl lg:text-8xl text-center font-bold drop-shadow-2xl">
           AS MELHORES FÉRIAS
         </span>
@@ -21,18 +33,14 @@ export default function Home() {
           >
             <FaWhatsapp className="transition-all text-4xl text-green-400 hover:scale-150" />
           </Link>
-          <Link href="https://www.instagram.com/shalomgoiania/" target="_blank">
-            <FaInstagram className="transition-all text-4xl text-[#E4405F] hover:scale-150" />
-          </Link>
           <Link
             href="https://www.instagram.com/juventudegoianiash/"
             target="_blank"
           >
-            <Image
-              src={pjj}
-              alt="Instagram PJJ"
-              className="w-6 hover:scale-150 transition-all"
-            />
+            <FaInstagram className="transition-all text-4xl text-[#E4405F] hover:scale-150" />
+          </Link>
+          <Link href="mailto:juventudegoiania@comshalom.org" target="_blank">
+            <IoMdMail className="transition-all text-4xl text-white hover:scale-150" />
           </Link>
         </div>
       </div>
