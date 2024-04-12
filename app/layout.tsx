@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/react'
 import { Quicksand } from 'next/font/google'
 import './globals.css'
 import AcampsLogo from '@/public/acamps.webp'
@@ -49,6 +50,7 @@ export default function RootLayout({
         </header>
         {children}
         <GoToTop />
+        <Analytics />
       </body>
     </html>
   )
