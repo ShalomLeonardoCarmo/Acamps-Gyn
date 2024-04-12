@@ -13,6 +13,7 @@ const quicksand = Quicksand({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Acamps Gyn',
   description: 'As melhores férias da sua vida! É impossível descrever!!!',
+  icons: '/acamps.webp',
 }
 
 export default function RootLayout({
