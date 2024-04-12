@@ -19,7 +19,7 @@ export default function Home() {
     <main className="h-screen">
       <div
         id="gradient"
-        className="bg-gradient-to-br animate-bgRotate bg-400 text-white gap-4 flex-col items-center justify-center from-sky-500 p-4 via-blue-800 to-purple-500 flex flex-1 h-full"
+        className="bg-gradient-to-br animate-bgRotate bg-400 text-white gap-4 flex-col items-center justify-center from-sky-500 p-4 to-blue-950 flex flex-1 h-full"
       >
         <h1 className="text-3xl md:text-6xl lg:text-8xl text-center font-bold drop-shadow-2xl">
           AS MELHORES FÉRIAS

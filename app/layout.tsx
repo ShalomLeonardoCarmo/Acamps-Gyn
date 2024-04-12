@@ -8,6 +8,7 @@ import HeaderMenu from '@/components/menu'
 import Link from 'next/link'
 import impossivelDescrever from '@/public/AcampsArt.png'
 import GoToTop from '@/components/button'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const quicksand = Quicksand({ subsets: ['latin'] })
 
@@ -51,6 +52,7 @@ export default function RootLayout({
         {children}
         <GoToTop />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
