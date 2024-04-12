@@ -1,4 +1,5 @@
 'use client'
+import { AboutSection } from '@/components/sections'
 import Tooltip from '@/components/tootlip'
 import Link from 'next/link'
 import { useEffect } from 'react'
@@ -51,9 +52,9 @@ export default function Home() {
         </div>
       </div>
 
-      <section>
-        <span></span>
-      </section>
+      <div className="flex w-full justify-center mt-4 p-2">
+        <AboutSection />
+      </div>
 
       <section className="h-screen" id="checklist">
         <span>Check-List</span>
