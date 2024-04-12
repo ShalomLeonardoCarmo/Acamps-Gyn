@@ -1,4 +1,5 @@
 'use client'
+import Tooltip from '@/components/tootlip'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa'
@@ -17,7 +18,7 @@ export default function Home() {
     <main className="h-screen">
       <div
         id="gradient"
-        className="bg-gradient-to-br text-white gap-4 flex-col items-center justify-center from-sky-500 p-4 to-blue-950 flex flex-1 h-full"
+        className="bg-gradient-to-br animate-bgRotate bg-400 text-white gap-4 flex-col items-center justify-center from-sky-500 p-4 via-blue-800 to-purple-500 flex flex-1 h-full"
       >
         <span className="text-3xl md:text-6xl lg:text-8xl text-center font-bold drop-shadow-2xl">
           AS MELHORES FÉRIAS
@@ -31,16 +32,22 @@ export default function Home() {
             href="https://wa.me/556236095354?text=Gostaria%20de%20saber%20mais%20sobre%20o%20Acamp%27s"
             target="_blank"
           >
-            <FaWhatsapp className="transition-all text-4xl text-green-400 hover:scale-150" />
+            <Tooltip text="WhatsApp">
+              <FaWhatsapp className="transition-all text-4xl text-green-400 hover:scale-150" />
+            </Tooltip>
           </Link>
           <Link
             href="https://www.instagram.com/juventudegoianiash/"
             target="_blank"
           >
-            <FaInstagram className="transition-all text-4xl text-[#E4405F] hover:scale-150" />
+            <Tooltip text="Instagram">
+              <FaInstagram className="transition-all text-4xl text-[#E4405F] hover:scale-150" />
+            </Tooltip>
           </Link>
           <Link href="mailto:juventudegoiania@comshalom.org" target="_blank">
-            <IoMdMail className="transition-all text-4xl text-white hover:scale-150" />
+            <Tooltip text="E-mail: juventudegoiania@comshalom.org">
+              <IoMdMail className="transition-all text-4xl text-white hover:scale-150" />
+            </Tooltip>
           </Link>
         </div>
       </div>
