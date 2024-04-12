@@ -7,8 +7,8 @@ export default function GoToTop() {
   const [scroll, setScroll] = useState(0)
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY
+    document.body.addEventListener('scroll', () => {
+      const scrolled = document.body.scrollTop
       setScroll(scrolled)
     })
   }, [])

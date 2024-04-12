@@ -20,13 +20,12 @@ export default function Home() {
         id="gradient"
         className="bg-gradient-to-br animate-bgRotate bg-400 text-white gap-4 flex-col items-center justify-center from-sky-500 p-4 via-blue-800 to-purple-500 flex flex-1 h-full"
       >
-        <span className="text-3xl md:text-6xl lg:text-8xl text-center font-bold drop-shadow-2xl">
+        <h1 className="text-3xl md:text-6xl lg:text-8xl text-center font-bold drop-shadow-2xl">
           AS MELHORES FÉRIAS
-        </span>
-        <span className="text-3xl md:text-6xl lg:text-8xl text-center font-bold drop-shadow-2xl">
+          <br />
           DA SUA VIDA!
-        </span>
-        <span className="font-semibold">É IMPOSSÍVEL DESCREVER!</span>
+        </h1>
+        <h2 className="font-semibold">É IMPOSSÍVEL DESCREVER!</h2>
         <div className="flex gap-4 items-center">
           <Link
             href="https://wa.me/556236095354?text=Gostaria%20de%20saber%20mais%20sobre%20o%20Acamp%27s"
@@ -51,6 +50,10 @@ export default function Home() {
           </Link>
         </div>
       </div>
+
+      <section>
+        <span></span>
+      </section>
 
       <section className="h-screen" id="checklist">
         <span>Check-List</span>

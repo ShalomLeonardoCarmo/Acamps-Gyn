@@ -11,8 +11,8 @@ import GoToTop from '@/components/button'
 const quicksand = Quicksand({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Acamps Gyn',
-  description: 'As melhores férias da sua vida! É impossível descrever!!!',
+  title: "Acamp's Gyn",
+  description: 'As melhores férias da sua vida! É impossível descrever!',
   icons: '/acamps.webp',
 }
 
@@ -22,8 +22,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-br" className="scroll-smooth">
-      <body className={quicksand.className}>
+    <html lang="pt-br" className="bg-acamps-flags overflow-hidden">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="mDDuLpenAdN0s3prodLsW-Ng7qHcKLvX79Zbb66zglA"
+        />
+      </head>
+      <body className={`${quicksand.className} overflow-auto scroll-smooth`}>
         <header className="w-full flex flex-col p-2 md-p-1 gap-2 divide-y bg-slate-950">
           <div className="flex items-center justify-center">
             <Link href="/">
