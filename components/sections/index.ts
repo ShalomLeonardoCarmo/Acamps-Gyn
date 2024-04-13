@@ -1,1 +1,2 @@
-export { AboutSection } from './about'
+export * from './about'
+export * from './check-list'

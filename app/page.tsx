@@ -4,11 +4,14 @@ import { IoMdMail } from 'react-icons/io'
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa'
 
 import Tooltip from '@/components/tootlip'
-import { AboutSection } from '@/components/sections'
+import { AboutSection, CheckListSection } from '@/components/sections'
 import { Metadata } from 'next'
+import { InstagramSection } from '@/components/sections/instagram'
 
 export const metadata: Metadata = {
   title: "Acamp's Gyn • É Impossível Descrever",
+  description:
+    'As melhores férias da sua vida! É impossível descrever! Vem viver essa experiência com a gente',
   openGraph: {
     alternateLocale: 'Goiânia/GO - Jardim América',
     countryName: 'Brasil',
@@ -16,7 +19,6 @@ export const metadata: Metadata = {
     locale: 'Goiânia/GO - Jardim América',
     title: "Acamp's Gyn • É Impossível Descrever",
     url: 'https://acampsgyn.vercel.app',
-    images: ['/acamps.webp'],
     emails: 'juventudegoiania@comshalom.org',
     phoneNumbers: '(62) 3609-5354',
     siteName: "Acamp's Gyn",
@@ -28,7 +30,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="h-screen">
+    <main className="h-screen gap-4">
       <div
         id="gradient"
         className="bg-gradient-to-tr animate-bgRotate bg-400 text-white gap-4 flex-col items-center justify-center from-sky-500 p-4 to-blue-950 flex flex-1 h-full"
@@ -64,13 +66,17 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex w-full justify-center mt-4 p-2">
+      <div className="flex w-full justify-center p-2">
         <AboutSection />
       </div>
 
-      <section className="h-screen" id="checklist">
-        <span>Check-List</span>
-      </section>
+      <div className="flex w-full justify-center p-2">
+        <CheckListSection />
+      </div>
+
+      <div className="flex w-full justify-center p-2 bg-zinc-900 h-[600px]">
+        <InstagramSection />
+      </div>
 
       <section className="h-screen" id="local">
         <span>Local</span>
