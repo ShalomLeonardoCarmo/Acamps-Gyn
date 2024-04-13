@@ -74,7 +74,7 @@ export default function Home() {
         <CheckListSection />
       </div>
 
-      <div className="flex w-full justify-center p-2 bg-zinc-900 h-[600px]">
+      <div className="flex w-full justify-center p-2 bg-zinc-800 h-fit">
         <InstagramSection />
       </div>
 

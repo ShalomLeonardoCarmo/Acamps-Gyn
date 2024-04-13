@@ -1,16 +1,17 @@
+'use client'
+
 export function InstagramSection() {
   return (
-    <>
+    <section>
       <blockquote
-        data-instgrm-captioned
-        data-instgrm-permalink="https://www.instagram.com/reel/C5qndFDOTcQ/?utm_source=ig_embed&amp;utm_campaign=loading"
+        data-instgrm-permalink="https://www.instagram.com/reel/C4a6n1xuQzI/?utm_source=ig_embed&amp;utm_campaign=loading"
         data-instgrm-version="14"
         className="instagram-media bg-white border-0 rounded-[3px] shadow-sm m-[1px] max-w-[540px] min-w-[326px] p-0 w-[99.375%]"
       >
         <div className="p-4">
           {' '}
           <a
-            href="https://www.instagram.com/reel/C5qndFDOTcQ/?utm_source=ig_embed&amp;utm_campaign=loading"
+            href="https://www.instagram.com/reel/C4a6n1xuQzI/?utm_source=ig_embed&amp;utm_campaign=loading"
             className="bg-white leading-[0] p-0 text-center no-underline w-full"
             target="_blank"
           >
@@ -65,39 +66,28 @@ export function InstagramSection() {
                 <div className="bg-[#F4F4F4] h-[12.5px] w-[12.5px] grow-0 mr-[14px] ml-[2px] transform -rotate-45 translate-x-[3px] translate-y-[1px]"></div>{' '}
                 <div className="bg-[#F4F4F4] rounded-half h-[12.5px] w-[12.5px] transform translate-x-[9px] translate-y-[-18px]"></div>
               </div>
-              {/* <div style="margin-left: 8px;"> */}
-              <div>
+              <div className="ml-2">
                 {' '}
-                {/* <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div>{' '} */}
-                <div></div>
-                {/* <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div> */}
-                <div></div>
+                <div className="bg-[#F4F4F4] rounded-half grow-0 h-5 w-5"></div>{' '}
+                <div className="w-0 h-0 border-t-2 border-transparent border-l-[6px] border-l-[#F4F4F4] border-b-2 border-b-transparent transform translate-x-4 -translate-y-1 rotate-[30deg]"></div>
               </div>
-              {/* <div style="margin-left: auto;"> */}
-              <div>
+              <div className="ml-auto">
                 {' '}
-                {/* <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div>{' '} */}
-                <div></div>
-                {/* <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div>{' '} */}
-                <div></div>
-                {/* <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div> */}
-                <div></div>
+                <div className="w-0 border-t-8 border-t-[#F4F4F4] border-r-8 border-r-transparent transform translate-y-[16px]"></div>{' '}
+                <div className="bg-[#F4F4F4] grow-0 h-3 w-4 transform translate-y-[-4px]"></div>{' '}
+                <div className="w-0 h-0 border-t-8 border-t-[#F4F4F4] border-l-8 border-l-transparent transform translate-y-[-4px] translate-x-[8px]"></div>
               </div>
             </div>{' '}
-            {/* <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> */}
-            <div>
+            <div className="flex flex-col grow-[1] justify-center mb-[24px]">
               {' '}
-              {/* <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div>{' '} */}
-              <div></div>
-              {/* <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div> */}
-              <div></div>
+              <div className="bg-[#F4F4F4] rounded-[4px] grow-0 h-[14px] mb-[6px] w-[224px]"></div>{' '}
+              <div className="bg-[#F4F4F4] rounded grow-0 h-[14px] w-[144px]"></div>
             </div>
           </a>
-          {/* <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"> */}
-          <p>
+          <p className="text-[#C9C8CD] font-arial-Sans text-[14px] leading-[17px] mb-0 mt-2 overflow-hidden p-8 text-center text-ellipsis whitespace-nowrap">
             <a
-              href="https://www.instagram.com/reel/C5qndFDOTcQ/?utm_source=ig_embed&amp;utm_campaign=loading"
-              // style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
+              href="https://www.instagram.com/reel/C4a6n1xuQzI/?utm_source=ig_embed&amp;utm_campaign=loading"
+              className="text-[#C9C8CD] font-arial-Sans text-[14px] font-normal leading-[17px]"
               target="_blank"
             >
               Uma publicação compartilhada por Shalom Goiânia (@shalomgoiania)
@@ -106,6 +96,6 @@ export function InstagramSection() {
         </div>
       </blockquote>{' '}
       <script async src="//www.instagram.com/embed.js"></script>
-    </>
+    </section>
   )
 }
