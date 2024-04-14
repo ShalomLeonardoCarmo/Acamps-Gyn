@@ -6,7 +6,6 @@ import { FaWhatsapp, FaInstagram } from 'react-icons/fa'
 import Tooltip from '@/components/tootlip'
 import { AboutSection, CheckListSection } from '@/components/sections'
 import { Metadata } from 'next'
-import { InstagramSection } from '@/components/sections/instagram'
 
 export const metadata: Metadata = {
   title: "Acamp's Gyn • É Impossível Descrever",
@@ -72,10 +71,6 @@ export default function Home() {
 
       <div className="flex w-full justify-center p-2">
         <CheckListSection />
-      </div>
-
-      <div className="flex w-full justify-center p-2 bg-zinc-800 h-fit">
-        <InstagramSection />
       </div>
 
       <section className="h-screen" id="local">

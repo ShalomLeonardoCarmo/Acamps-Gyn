@@ -1,8 +1,10 @@
 'use client'
 
+import { Fragment } from 'react'
+
 export function InstagramSection() {
   return (
-    <section>
+    <Fragment>
       <blockquote
         data-instgrm-permalink="https://www.instagram.com/reel/C4a6n1xuQzI/?utm_source=ig_embed&amp;utm_campaign=loading"
         data-instgrm-version="14"
@@ -96,6 +98,6 @@ export function InstagramSection() {
         </div>
       </blockquote>{' '}
       <script async src="//www.instagram.com/embed.js"></script>
-    </section>
+    </Fragment>
   )
 }
