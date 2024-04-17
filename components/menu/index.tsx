@@ -28,7 +28,7 @@ export default function HeaderMenu() {
         Entre em contato
       </Link>
       <Link
-        href="#inscricao"
+        href="/inscricao"
         className="lg:hover:scale-125 md:hover:scale-110 lg:text-xl text-md font-bold flex h-fit hover:text-orange-400 transition-all"
       >
         Inscrição
