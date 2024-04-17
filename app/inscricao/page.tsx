@@ -17,9 +17,9 @@ export default function InscricaoPage() {
   function generateProductPix() {
     const data = {}
     axios
-      .post('https://sandbox.api.pagseguro.com/oders', data, {
+      .post('https://api.pagseguro.com/oders', data, {
         headers: {
-          Authorization: 'Bearer 9797096E633D45DEBC92D69780B08C78',
+          Authorization: 'Bearer D3CF8978EEEE960AA4254FB9D070A088',
           'Content-Type': 'application/json',
         },
         withCredentials: true,
