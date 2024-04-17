@@ -7,11 +7,19 @@ export default function InscricaoPage() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [productData, setProductData] = useState({
     customer: {
-      name: 'Teste',
+      name: 'khefuwgvef',
+      email: 'kshfhjb@teste.com',
       tax_id: '61739303318',
-      email: 'teste@teste.com',
     },
-    reference_id: 'ex-00001',
+    reference_id: 'acampsgyn',
+    items: [
+      {
+        name: 'Acamps',
+        quantity: 1,
+        unit_amount: 27990,
+      },
+    ],
+    qr_codes: [{ amount: { value: '27990' } }],
   })
 
   function generateProductPix() {
