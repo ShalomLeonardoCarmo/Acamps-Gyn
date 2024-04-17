@@ -27,7 +27,8 @@ export default function InscricaoPage() {
     axios
       .post('https://api.pagseguro.com/oders', data, {
         headers: {
-          Authorization: 'Bearer D3CF8978EEEE960AA4254FB9D070A088',
+          Authorization:
+            'Bearer bbc30c59-06c1-4d83-a3ff-02b225f411f002045c104336ad028a086f72245306683ac8-c5fa-4d2b-a4ca-b20e4dd0b37b',
           'Content-Type': 'application/json',
         },
         withCredentials: true,
