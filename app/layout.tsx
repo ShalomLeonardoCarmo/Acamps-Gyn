@@ -24,33 +24,32 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="pt-br"
-      className="bg-acamps-flags animate-flags overflow-hidden"
-    >
+    <html lang="pt-br" className="bg-acamps-flags animate-flags scroll-smooth">
       <head>
         <meta
           name="google-site-verification"
           content="mDDuLpenAdN0s3prodLsW-Ng7qHcKLvX79Zbb66zglA"
         />
       </head>
-      <body className={`${quicksand.className} overflow-auto scroll-smooth`}>
-        <header className="w-full flex flex-col p-2 md-p-1 gap-2 divide-y bg-slate-950">
-          <div className="flex items-center justify-center">
-            <Link href="/">
+      <body className={`${quicksand.className}`}>
+        <header className="w-full bg-slate-950">
+          <div className="flex flex-col p-2 md-p-1 gap-2 divide-y">
+            <div className="flex items-center justify-center">
+              <Link href="/">
+                <Image
+                  src={AcampsLogo}
+                  alt="Acamps"
+                  className="min-w-14 min-h-14 md:w-20 md:h-20 lg:w-28 lg:h-28"
+                />
+              </Link>
               <Image
-                src={AcampsLogo}
-                alt="Acamps"
-                className="min-w-14 min-h-14 md:w-20 md:h-20 lg:w-28 lg:h-28"
+                alt="Impossível Descrever"
+                src={impossivelDescrever}
+                className="max-h-14 md:max-h-20 lg:max-h-28 w-auto"
               />
-            </Link>
-            <Image
-              alt="Impossível Descrever"
-              src={impossivelDescrever}
-              className="max-h-14 md:max-h-20 lg:max-h-28 w-auto"
-            />
+            </div>
+            <HeaderMenu />
           </div>
-          <HeaderMenu />
         </header>
         {children}
         <GoToTop />

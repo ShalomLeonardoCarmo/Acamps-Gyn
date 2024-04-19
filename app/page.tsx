@@ -4,7 +4,7 @@ import { IoMdMail } from 'react-icons/io'
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa'
 
 import Tooltip from '@/components/tootlip'
-import { AboutSection, CheckListSection } from '@/components/sections'
+import { AboutSection } from '@/components/sections'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -29,10 +29,10 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="h-screen gap-4">
+    <main className="gap-4">
       <div
         id="gradient"
-        className="bg-gradient-to-tr animate-bgRotate bg-400 text-white gap-4 flex-col items-center justify-center from-sky-500 p-4 to-blue-950 flex flex-1 h-full"
+        className="bg-gradient-to-tr animate-bgRotate bg-400 text-white h-[90vh] gap-4 flex-col items-center justify-center from-sky-500 p-4 to-blue-950 flex flex-1"
       >
         <h1 className="text-3xl md:text-6xl lg:text-8xl text-center font-bold drop-shadow-2xl">
           AS MELHORES FÉRIAS
@@ -68,26 +68,6 @@ export default function Home() {
       <div className="flex w-full justify-center p-2">
         <AboutSection />
       </div>
-
-      <div className="flex w-full justify-center p-2">
-        <CheckListSection />
-      </div>
-
-      <section className="h-screen" id="local">
-        <span>Local</span>
-      </section>
-
-      <section className="h-screen" id="apadrinhamento">
-        <span>Apadrinhamento</span>
-      </section>
-
-      <section className="h-screen" id="contato">
-        <span>Contato</span>
-      </section>
-
-      <section className="h-screen" id="inscricao">
-        <span>Inscrição</span>
-      </section>
     </main>
   )
 }
