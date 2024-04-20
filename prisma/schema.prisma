@@ -26,7 +26,7 @@ model registrations {
   frequentlly_use_medication String
   wich_medication            Json
   how_find_acamps            String
-  my_friend_called_med       String
+  my_friend_called_me        String
   wich_city                  String
   city_name                  String
   createdAt                  DateTime @default(now())
