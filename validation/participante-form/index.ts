@@ -5,7 +5,7 @@ export const participanteFormSchema = z.object({
     .string()
     .min(3, 'Digite pelo menos 3 letras')
     .max(255, 'Limite de caracteres atingido (255)'),
-  birthdate: z.date(),
+  birthdate: z.string(),
   general_registration: z
     .string()
     .transform((str) => str.replace(/[^0-9]/g, '')),
@@ -26,12 +26,21 @@ export const participanteFormSchema = z.object({
   have_allergies: z.nullable(z.string()),
   food_restriction: z.array(z.string()).default([]),
   frequentlly_use_medication: z.boolean().default(false),
-  wich_medication: z.object({
-    medication_name: z.string(),
-    time: z.string(),
-  }),
+  wich_medication: z
+    .array(
+      z.object({
+        medication_name: z.string(),
+        frequency: z.string(),
+      }),
+    )
+    .default([]),
   how_find_acamps: z.nullable(z.string()),
   my_frined_called_me: z.nullable(z.string()),
-  wich_city: z.number().default(1),
+  wich_city: z
+    .string()
+    .default('5')
+    .or(z.number())
+    .transform((city) => parseInt(String(city))),
   city_name: z.nullable(z.string()),
+  address: z.string(),
 })

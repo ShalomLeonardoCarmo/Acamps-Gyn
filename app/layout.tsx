@@ -2,11 +2,10 @@ import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import { Quicksand } from 'next/font/google'
 import './globals.css'
-import AcampsLogo from '@/public/acamps.webp'
 import Image from 'next/image'
 import HeaderMenu from '@/components/menu'
 import Link from 'next/link'
-import impossivelDescrever from '@/public/AcampsArt.png'
+import impossivelDescrever from '@/public/Acamps.png'
 import GoToTop from '@/components/button'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
@@ -24,7 +23,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-br" className="bg-acamps-flags animate-flags scroll-smooth">
+    <html
+      lang="pt-br"
+      className="bg-acamps-flags bg-red-100 animate-flags scroll-smooth"
+    >
       <head>
         <meta
           name="google-site-verification"
@@ -32,21 +34,16 @@ export default function RootLayout({
         />
       </head>
       <body className={`${quicksand.className}`}>
-        <header className="w-full bg-slate-950">
+        <header className="w-full bg-red-600">
           <div className="flex flex-col p-2 md-p-1 gap-2 divide-y">
             <div className="flex items-center justify-center">
               <Link href="/">
                 <Image
-                  src={AcampsLogo}
-                  alt="Acamps"
-                  className="min-w-14 min-h-14 md:w-20 md:h-20 lg:w-28 lg:h-28"
+                  alt="Impossível Descrever"
+                  src={impossivelDescrever}
+                  className="max-h-14 md:max-h-20 lg:max-h-28 w-auto"
                 />
               </Link>
-              <Image
-                alt="Impossível Descrever"
-                src={impossivelDescrever}
-                className="max-h-14 md:max-h-20 lg:max-h-28 w-auto"
-              />
             </div>
             <HeaderMenu />
           </div>

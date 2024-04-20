@@ -11,7 +11,7 @@ export default function InscricaoPage() {
     <main className="flex flex-col items-center gap-4">
       <h1 className="hidden">Inscrições</h1>
       <section className="flex flex-col mt-4 text-center">
-        <h2 className="font-bold text-4xl gap-2 text-purple-700 text-center">
+        <h2 className="font-bold text-4xl gap-2 text-red-600 text-center">
           INSCRIÇÃO PARTICIPANTES!
         </h2>
         <span className="flex justify-center font-semibold">
@@ -20,14 +20,14 @@ export default function InscricaoPage() {
 
         <button
           onClick={() => setOpenParticipante(true)}
-          className="font-bold p-2 bg-orange-400 text-white rounded-xl shadow-sm hover:bg-purple-700 transition-all hover:shadow-xl"
+          className="font-bold p-2 bg-orange-400 text-white rounded-xl shadow-sm hover:bg-red-600 transition-all hover:shadow-xl"
         >
           CLIQUE AQUI!
         </button>
       </section>
 
       <section className="flex flex-col mt-4 text-center">
-        <h2 className="font-bold text-4xl gap-2 text-purple-700">
+        <h2 className="font-bold text-4xl gap-2 text-red-600">
           INSCRIÇÃO SERVOS!
         </h2>
         <span className="flex justify-center font-semibold max-w-[475px] text-center">
@@ -37,18 +37,16 @@ export default function InscricaoPage() {
 
         <button
           onClick={() => setOpenServo(true)}
-          className="font-bold p-2 w-full bg-orange-400 text-white rounded-xl shadow-sm hover:bg-purple-700 transition-all hover:shadow-xl"
+          className="font-bold p-2 w-full bg-orange-400 text-white rounded-xl shadow-sm hover:bg-red-600 transition-all hover:shadow-xl"
         >
           CLIQUE AQUI!
         </button>
       </section>
 
-      {openParticipante && (
-        <ParticipanteForm
-          onClose={() => setOpenParticipante(false)}
-          show={openParticipante}
-        />
-      )}
+      <ParticipanteForm
+        onClose={() => setOpenParticipante(false)}
+        show={openParticipante}
+      />
 
       {openServo && <></>}
     </main>

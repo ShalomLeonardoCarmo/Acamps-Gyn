@@ -3,7 +3,8 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    const result = await sql`CREATE TABLE registrations (
+    const result =
+      await sql`CREATE TABLE ${process.env.NODE_ENV === 'production' ? 'registrations' : 'dev_registrations'} (
         name varchar(255) NOT NULL,
         birthdate date,
         general_registration varchar(255) NOT NULL,
