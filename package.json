@@ -4,18 +4,21 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && prisma migrate deploy && next build",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
+    "@prisma/client": "^5.12.1",
     "@rocketseat/eslint-config": "^2.2.2",
     "@vercel/analytics": "^1.2.2",
     "@vercel/postgres": "^0.8.0",
     "@vercel/speed-insights": "^1.0.10",
     "axios": "^1.6.8",
     "next": "14.1.4",
+    "prisma": "^5.12.1",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.3",
