@@ -35,7 +35,7 @@ export const participanteFormSchema = z.object({
     )
     .default([]),
   how_find_acamps: z.nullable(z.string()),
-  my_frined_called_me: z.nullable(z.string()),
+  my_friend_called_me: z.nullable(z.string()),
   wich_city: z
     .string()
     .default('5')

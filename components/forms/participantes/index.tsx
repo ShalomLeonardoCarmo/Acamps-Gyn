@@ -11,6 +11,7 @@ import { z } from 'zod'
 import { ErrorMessage } from '../error-message'
 import FormField from '../field'
 import { Fragment, useEffect, useState } from 'react'
+import axios from 'axios'
 
 export interface ParticipanteFormProps {
   show: boolean
@@ -30,7 +31,13 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
   })
 
   async function submit(formData: ParticipanteFormData) {
-    console.log(formData)
+    // const { rows, rowCount } = await createRegistration(formData)
+    axios.post('/api/database/create-registration', formData).then((result) => {
+      console.log(result)
+    })
+
+    // console.log(`Row: ${rows}`)
+    // console.log(rowCount)
   }
 
   const {
@@ -65,6 +72,11 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
         <div className="flex flex-col text-center font-semibold p-2">
           <span className="font-bold text-lg">Formulário de inscrição</span>
           <span>participantes</span>
+        </div>
+
+        <div className="flex flex-col">
+          <span>Pagamento aqui!</span>
+          <span>Espaço do QR Code</span>
         </div>
 
         <FormProvider {...participanteForm}>
@@ -314,7 +326,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                   id="myFriendCalledMe"
                   placeholder="João Pedro"
                   className="p-2 rounded-xl border border-zinc-600"
-                  {...register('my_frined_called_me')}
+                  {...register('my_friend_called_me')}
                 />
                 <ErrorMessage field="my_friend_called_me" />
               </FormField>
