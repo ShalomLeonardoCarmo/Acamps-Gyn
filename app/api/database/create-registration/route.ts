@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   const body = await new Response(request.body).text()
   console.log(body)
 
-  const { rowCount, rows } = await createRegistration(JSON.parse(body))
+  await createRegistration(JSON.parse(body))
 
-  return NextResponse.json({ data: { rows, count: rowCount } }, { status: 201 })
+  return NextResponse.json({ result: 'Sucesso' }, { status: 201 })
 }
