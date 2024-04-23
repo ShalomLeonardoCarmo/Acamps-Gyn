@@ -26,7 +26,7 @@ export const participanteFormSchema = z.object({
       .min(3, 'Digite pelo menos 3 letras'),
     number: z.string().transform((phone) => phone.replace(/[^0-9]/g, '')),
   }),
-  have_allergies: z.nullable(z.string()),
+  have_allergies: z.string().default(''),
   food_restriction: z.string().default(''),
   frequentlly_use_medication: z.boolean().default(false),
   wich_medication: z
@@ -37,13 +37,13 @@ export const participanteFormSchema = z.object({
       }),
     )
     .default([]),
-  how_find_acamps: z.nullable(z.string()),
-  my_friend_called_me: z.nullable(z.string()),
+  how_find_acamps: z.string().default(''),
+  my_friend_called_me: z.string().default(''),
   wich_city: z
     .string()
     .default('5')
     .or(z.number())
     .transform((city) => parseInt(String(city))),
-  city_name: z.nullable(z.string()),
+  city_name: z.string().default(''),
   address: z.string(),
 })
