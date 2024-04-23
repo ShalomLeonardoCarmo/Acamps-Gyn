@@ -30,6 +30,7 @@ model registrations {
   wich_city                  Int
   city_name                  String
   address                    String
+  payment                    String
   createdAt                  DateTime @default(now())
 }
 
@@ -52,5 +53,6 @@ model dev_registrations {
   wich_city                  Int
   city_name                  String
   address                    String
+  payment                    String
   createdAt                  DateTime @default(now())
 }

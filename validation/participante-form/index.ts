@@ -12,12 +12,16 @@ export const participanteFormSchema = z.object({
   general_registration: z
     .string()
     .transform((str) => str.replace(/[^0-9]/g, '')),
-  general_registration_front: z.string({
-    required_error: 'Foto da frente da identidade é obrigatória',
-  }),
-  general_registration_back: z.string({
-    required_error: 'Foto do verso da identidade é obrigatória',
-  }),
+  general_registration_front: z
+    .string({
+      required_error: 'Foto da frente da identidade é obrigatória',
+    })
+    .default(''),
+  general_registration_back: z
+    .string({
+      required_error: 'Foto do verso da identidade é obrigatória',
+    })
+    .default(''),
   email: z.string().email('Insira um e-mail válido'),
   phone: z.string().transform((phone) => phone.replace(/[^0-9]/g, '')),
   responsible_contact: z.object({
@@ -46,4 +50,5 @@ export const participanteFormSchema = z.object({
     .transform((city) => parseInt(String(city))),
   city_name: z.string().default(''),
   address: z.string(),
+  payment: z.string().default(''),
 })

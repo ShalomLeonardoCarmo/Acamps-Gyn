@@ -5,7 +5,6 @@ import { useState } from 'react'
 
 export default function InscricaoPage() {
   const [openParticipante, setOpenParticipante] = useState(false)
-  const [openServo, setOpenServo] = useState(false)
 
   return (
     <main className="flex flex-col items-center gap-4">
@@ -26,7 +25,7 @@ export default function InscricaoPage() {
         </button>
       </section>
 
-      <section className="flex flex-col mt-4 text-center">
+      {/* <section className="flex flex-col mt-4 text-center">
         <h2 className="font-bold text-4xl gap-2 text-red-600">
           INSCRIÇÃO SERVOS!
         </h2>
@@ -41,14 +40,14 @@ export default function InscricaoPage() {
         >
           CLIQUE AQUI!
         </button>
-      </section>
+      </section> */}
 
       <ParticipanteForm
         onClose={() => setOpenParticipante(false)}
         show={openParticipante}
       />
 
-      {openServo && <></>}
+      {/* {openServo && <></>} */}
     </main>
   )
 }

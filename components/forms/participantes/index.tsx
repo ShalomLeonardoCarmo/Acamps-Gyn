@@ -10,8 +10,11 @@ import { MdAddCircle, MdOutlineCancel, MdRemoveCircle } from 'react-icons/md'
 import { z } from 'zod'
 import { ErrorMessage } from '../error-message'
 import FormField from '../field'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import axios from 'axios'
+import { upload } from '@vercel/blob/client'
+import Link from 'next/link'
+import Tooltip from '@/components/tootlip'
 
 export interface ParticipanteFormProps {
   show: boolean
@@ -21,6 +24,10 @@ export interface ParticipanteFormProps {
 export type ParticipanteFormData = z.infer<typeof participanteFormSchema>
 
 export function ParticipanteForm(props: ParticipanteFormProps) {
+  const inputRgFrontRef = useRef<HTMLInputElement>(null)
+  const inputRgBackRef = useRef<HTMLInputElement>(null)
+  const inputPaymentRef = useRef<HTMLInputElement>(null)
+
   const [rg, setRg] = useState('')
   const participanteForm = useForm<ParticipanteFormData>({
     resolver: zodResolver(participanteFormSchema),
@@ -31,13 +38,63 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
   })
 
   async function submit(formData: ParticipanteFormData) {
-    // const { rows, rowCount } = await createRegistration(formData)
-    axios.post('/api/database/create-registration', formData).then((result) => {
-      console.log(result)
-    })
+    if (!inputRgBackRef.current?.files) {
+      return alert('Insira a foto do RG (verso)')
+    }
+    if (!inputRgFrontRef.current?.files) {
+      return alert('Insira a foto do RG (frente)')
+    }
+    if (!inputPaymentRef.current?.files) {
+      return alert('Insira o comprovante de pagamento')
+    }
 
-    // console.log(`Row: ${rows}`)
-    // console.log(rowCount)
+    const rgFrontFile = inputRgFrontRef.current.files[0]
+    const rgBackFile = inputRgBackRef.current.files[0]
+    const paymentFile = inputPaymentRef.current.files[0]
+
+    const newRgFrontBlob = await upload(
+      `${getValues('general_registration')}-front`,
+      rgFrontFile,
+      {
+        access: 'public',
+        handleUploadUrl: '/api/registration/upload',
+      },
+    )
+    const newRgBackBlob = await upload(
+      `${getValues('general_registration')}-back`,
+      rgBackFile,
+      {
+        access: 'public',
+        handleUploadUrl: '/api/registration/upload',
+      },
+    )
+    const newPaymentBlob = await upload(
+      `${getValues('general_registration')}-payment`,
+      paymentFile,
+      {
+        access: 'public',
+        handleUploadUrl: '/api/payment/upload',
+      },
+    )
+
+    formData.general_registration_back = newRgBackBlob.url
+    formData.general_registration_front = newRgFrontBlob.url
+    formData.payment = newPaymentBlob.url
+
+    axios
+      .post('/api/database/create-registration', formData)
+      .then(() => {
+        alert('Inscrição realizada com sucesso')
+        setRg('')
+        reset()
+        props.onClose()
+      })
+      .catch((error) => {
+        alert(
+          'Erro ao realizar inscrição. Confira se todos os campos foram preenchidos',
+        )
+        console.error(error)
+      })
   }
 
   const {
@@ -46,6 +103,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
     register,
     watch,
     setValue,
+    getValues,
     control,
     clearErrors,
     reset,
@@ -76,8 +134,37 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
         </div>
 
         <div className="flex flex-col">
-          <span>Pagamento aqui!</span>
-          <span>Espaço do QR Code</span>
+          <span className="p-2 text-center">
+            Prepara-se para as melhores férias da sua vida! 🏕️✨
+            <br />
+            <br />
+            Acamp&apos;s Goiânia já está de volta e melhor do que nunca em julho
+            de 2024!!! Lançou! 🚀
+            <br />
+            <br />
+            Momentos de muito lazer, muita animação, mergulhos na piscina, e
+            alegria sem fim te esperam.
+            <br />
+            Quando?
+            <br />
+            🗓️ Data: 10 a 14 de Julho
+            <br />
+            📍Local: Espaço Arvoredo
+            <br />
+            <br />
+            Vocês não podem perder!!
+            <br />
+            <br />
+            📣 Inscrições oficialmente abertas e o 1° lote vai até 21/05 ou até
+            terminarem as vagas (são só 10 ein).
+            <br />
+            <br />
+            Corre e garanta sua vaga nessa aventura dos melhores dias da sua
+            vida. Vagas limitadas.
+            <br />
+            <br />
+            Veeeeeem 🗣️🗣️
+          </span>
         </div>
 
         <FormProvider {...participanteForm}>
@@ -109,7 +196,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
               </FormField>
 
               <FormField>
-                <label htmlFor="general_registration">Número de RG</label>
+                <label htmlFor="general_registration">Número de RG *</label>
                 <input
                   required
                   value={rg}
@@ -130,19 +217,19 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
               </FormField>
 
               <FormField>
-                <label htmlFor="">Foto do RG (frente)</label>
-                <input required {...register('general_registration_front')} />
+                <label htmlFor="">Foto do RG (frente) *</label>
+                <input required ref={inputRgFrontRef} type="file" />
                 <ErrorMessage field="general_registration_front" />
               </FormField>
 
               <FormField>
-                <label htmlFor="">Foto do RG (verso)</label>
-                <input required {...register('general_registration_back')} />
+                <label htmlFor="">Foto do RG (verso) *</label>
+                <input required ref={inputRgBackRef} type="file" />
                 <ErrorMessage field="general_registration_back" />
               </FormField>
 
               <FormField>
-                <label htmlFor="email">E-mail</label>
+                <label htmlFor="email">E-mail *</label>
                 <input
                   required
                   id="email"
@@ -167,11 +254,11 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
               </FormField>
 
               <FormField>
-                <span>Contato do(a) Responsável</span>
+                <span>Contato do(a) Responsável *</span>
                 <div className="flex flex-col">
                   <div className="flex gap-2 items-center">
                     <label htmlFor="responsible_name" className="w-20">
-                      Nome
+                      Nome *
                     </label>
                     <input
                       required
@@ -186,7 +273,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
 
                   <div className="flex gap-2 items-center">
                     <label htmlFor="responsible_number" className="w-20">
-                      Número
+                      Número *
                     </label>
                     <input
                       required
@@ -203,7 +290,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
 
               <FormField>
                 <label htmlFor="have_allergies">
-                  Possui alguma alergia? Se sim, quais?
+                  Possui alguma alergia? Se sim, quais? *
                 </label>
                 <input
                   required
@@ -217,7 +304,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
 
               <FormField>
                 <label htmlFor="food_restriction">
-                  Possui alguma restrição alimentar? Se sim, quais?
+                  Possui alguma restrição alimentar? Se sim, quais? *
                 </label>
                 <input
                   required
@@ -263,7 +350,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                           <label
                             htmlFor={`wich_medication.${index}.medication_name`}
                           >
-                            Nome da medicação
+                            Nome da medicação *
                           </label>
                           <input
                             required
@@ -277,7 +364,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                         </div>
                         <div className="flex flex-col">
                           <label htmlFor={`wich_medication.${index}.frequency`}>
-                            Com que frequência usa
+                            Com que frequência usa *
                           </label>
                           <input
                             required
@@ -307,7 +394,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
 
               <FormField>
                 <label htmlFor="how_find_acamps">
-                  Como ficou sabendo do Acamp&apos;s?
+                  Como ficou sabendo do Acamp&apos;s? *
                 </label>
                 <input
                   required
@@ -335,7 +422,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
               </FormField>
 
               <FormField>
-                <label htmlFor="wichCity">Em qual cidade você reside?</label>
+                <label htmlFor="wichCity">Em qual cidade você reside? *</label>
                 <select
                   required
                   id="wichCity"
@@ -353,7 +440,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
 
                 {Number(watchWichCity) === 5 && (
                   <Fragment>
-                    <label htmlFor="cityName">Informe o nome da cidade</label>
+                    <label htmlFor="cityName">Informe o nome da cidade *</label>
                     <input
                       required
                       id="cityName"
@@ -367,7 +454,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
               </FormField>
 
               <FormField>
-                <label htmlFor="address">Informe seu endereço</label>
+                <label htmlFor="address">Informe seu endereço *</label>
                 <input
                   required
                   id="address"
@@ -379,11 +466,54 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
               </FormField>
             </div>
 
+            <div className="flex flex-col w-full text-center p-2">
+              <span className="font-bold text-xl">
+                PARA REALIZAR O PAGAMENTO VIA CARTÃO DE CRÉDITO OU BOLETO
+                BANCÁRIO, ACESSE O LINK:
+              </span>
+              <Link
+                href="https://pag.ae/7-srkQQeu"
+                target="_blank"
+                className="text-blue-600 font-bold text-lg"
+              >
+                https://pag.ae/7-srkQQeu
+              </Link>
+            </div>
+            <div className="flex flex-col w-full text-center p-2">
+              <span className="font-bold text-xl">
+                PARA PAGAMENTOS VIA PIX, UTILIZE NOSSA CHAVE PIX:
+              </span>
+              <Tooltip text="Clique para copiar">
+                <button
+                  className="text-blue-600 font-bold text-lg"
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard.writeText(
+                      'economatogoiania@comshalom.org',
+                    )
+                    alert('Chave PIX copiada com sucesso')
+                  }}
+                >
+                  economatogoiania@comshalom.org
+                </button>
+              </Tooltip>
+              <span className="font-semibold text-lg">
+                e envie um PIX no valor de R$ 289,90
+              </span>
+            </div>
+
+            <div className="p-2 flex flex-col">
+              <label>Anexe o comprovante de pagamento *</label>
+              <input required type="file" ref={inputPaymentRef} />
+              <ErrorMessage field="payment" />
+            </div>
+
             <div className="flex gap-2 p-2 w-full items-center justify-center">
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className="
+                disabled:bg-red-800
               bg-red-600 flex items-center justify-center
               sm:gap-2 p-2 rounded-xl font-bold text-yellow-200
               transition-all hover:bg-red-800 text-[13px] sm:text-base
