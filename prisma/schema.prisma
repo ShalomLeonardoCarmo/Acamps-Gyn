@@ -23,11 +23,34 @@ model registrations {
   responsible_contact        Json
   have_allergies             String
   food_restriction           String
-  frequentlly_use_medication String
+  frequentlly_use_medication Boolean
   wich_medication            Json
   how_find_acamps            String
   my_friend_called_me        String
-  wich_city                  String
+  wich_city                  Int
   city_name                  String
+  address                    String
+  createdAt                  DateTime @default(now())
+}
+
+model dev_registrations {
+  id                         Int      @id @default(autoincrement())
+  name                       String
+  birthdate                  DateTime
+  general_registration       String
+  general_registration_front String
+  general_registration_back  String
+  email                      String
+  phone                      String
+  responsible_contact        Json
+  have_allergies             String
+  food_restriction           String
+  frequentlly_use_medication Boolean
+  wich_medication            Json
+  how_find_acamps            String
+  my_friend_called_me        String
+  wich_city                  Int
+  city_name                  String
+  address                    String
   createdAt                  DateTime @default(now())
 }

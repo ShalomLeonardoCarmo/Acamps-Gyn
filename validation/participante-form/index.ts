@@ -5,7 +5,10 @@ export const participanteFormSchema = z.object({
     .string()
     .min(3, 'Digite pelo menos 3 letras')
     .max(255, 'Limite de caracteres atingido (255)'),
-  birthdate: z.string(),
+  birthdate: z.string().transform((val) => {
+    console.log(new Date(val).toISOString())
+    return new Date(val).toISOString()
+  }),
   general_registration: z
     .string()
     .transform((str) => str.replace(/[^0-9]/g, '')),
@@ -24,7 +27,7 @@ export const participanteFormSchema = z.object({
     number: z.string().transform((phone) => phone.replace(/[^0-9]/g, '')),
   }),
   have_allergies: z.nullable(z.string()),
-  food_restriction: z.array(z.string()).default([]),
+  food_restriction: z.string().default(''),
   frequentlly_use_medication: z.boolean().default(false),
   wich_medication: z
     .array(

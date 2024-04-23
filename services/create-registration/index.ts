@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { ParticipanteFormData } from '@/components/forms/participantes'
 import { PrismaClient } from '@prisma/client'
 
@@ -6,9 +7,14 @@ const prisma = new PrismaClient()
 export async function createRegistration(
   participanteFormData: ParticipanteFormData,
 ) {
-  const newRegistration = await prisma.registrations.create({
-    data: participanteFormData,
-  })
+  const env = process.env.NODE_ENV
+
+  const newRegistration =
+    env === 'development'
+      ? await prisma.dev_registrations.create({ data: participanteFormData })
+      : await prisma.registrations.create({
+        data: participanteFormData,
+      })
 
   console.log(newRegistration)
   // const client = await db.connect()

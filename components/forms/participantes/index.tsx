@@ -45,6 +45,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
     handleSubmit,
     register,
     watch,
+    setValue,
     control,
     clearErrors,
     reset,
@@ -233,7 +234,9 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                   <input
                     id="use-medication"
                     type="checkbox"
-                    {...register('frequentlly_use_medication')}
+                    onChange={(e) =>
+                      setValue('frequentlly_use_medication', e.target.checked)
+                    }
                   />
 
                   {watchMedication && (
