@@ -4,8 +4,8 @@ import { MdPool } from 'react-icons/md'
 
 export function AboutSection() {
   return (
-    <section className="p-2 bg-zinc-100 w-fit flex flex-col max-w-4xl gap-4 items-center justify-center rounded-xl shadow-lg">
-      <h2 className="text-5xl font-bold text-center text-purple-700">
+    <section className="p-2 bg-zinc-100 w-fit flex flex-col max-w-[100vw] overflow-hidden md:max-w-4xl gap-4 items-center justify-center rounded-xl shadow-lg">
+      <h2 className="text-5xl font-bold text-center text-red-600">
         Acamp&apos;s Gyn
       </h2>
       <div className="grid sm:grid-cols-2 sm:divide-x-2">
@@ -29,19 +29,18 @@ export function AboutSection() {
           <br />
           <span className="font-bold">
             <span className="flex gap-2 items-center">
-              <GiMusicalNotes className="text-purple-700" size={22} /> Shows ao
+              <GiMusicalNotes className="text-red-600" size={22} /> Shows ao
               vivo
             </span>
             <span className="flex gap-2 items-center">
-              <MdPool className="text-purple-700" size={22} /> Piscina para
-              lazer
+              <MdPool className="text-red-600" size={22} /> Piscina para lazer
             </span>
             <span className="flex gap-2 items-center">
-              <GiForestCamp className="text-purple-700" size={22} /> Contato com
-              a natureza
+              <GiForestCamp className="text-red-600" size={22} /> Contato com a
+              natureza
             </span>
             <span className="flex gap-2 items-center">
-              <GiPartyPopper className="text-purple-700" size={22} /> Bastante
+              <GiPartyPopper className="text-red-600" size={22} /> Bastante
               animação
             </span>
             <span className="flex gap-2 items-center">E MUITO MAIS!</span>

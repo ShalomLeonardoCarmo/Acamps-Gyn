@@ -6,6 +6,7 @@ import { FaWhatsapp, FaInstagram } from 'react-icons/fa'
 import Tooltip from '@/components/tootlip'
 import { AboutSection } from '@/components/sections'
 import { Metadata } from 'next'
+import LocalSection from '@/components/sections/local-section'
 
 export const metadata: Metadata = {
   title: "Acamp's Gyn • É Impossível Descrever",
@@ -67,6 +68,10 @@ export default function Home() {
 
       <div className="flex w-full justify-center p-2">
         <AboutSection />
+      </div>
+
+      <div className="flex w-full justify-center p-2">
+        <LocalSection />
       </div>
     </main>
   )
