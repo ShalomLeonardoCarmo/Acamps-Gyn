@@ -1,13 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MdPlace } from 'react-icons/md'
 
 export default function LocalSection() {
-  const screenWidth = window.screen.width
-
+  const [screenWidth, setScreenWidth] = useState<number>()
   const [map, setMap] = useState(1)
+
+  useEffect(() => {
+    setScreenWidth(window.screen.width)
+  }, [])
 
   return (
     <section
@@ -59,7 +62,9 @@ export default function LocalSection() {
       {map === 1 ? (
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244436.50968411955!2d-49.456840829959944!3d-16.810450824540833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935effb4e5be59db%3A0x96447c7cdb59cce0!2zQ2jDoWNhcmEgRG9pcyBDb3Jhw6fDtWVz!5e0!3m2!1spt-BR!2sbr!4v1713990662162!5m2!1spt-BR!2sbr"
-          width={screenWidth < 600 ? `${screenWidth - 50}` : '600'}
+          width={
+            screenWidth && screenWidth < 600 ? `${screenWidth - 50}` : '600'
+          }
           height="400"
           className="border-none"
           allowFullScreen
@@ -69,7 +74,9 @@ export default function LocalSection() {
       ) : (
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15286.160107049383!2d-49.30181389218753!3d-16.699885599999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935ef43240c16cbb%3A0xf625613b9d5bb4d0!2sComunidade%20Cat%C3%B3lica%20Shalom%20(Goiania)!5e0!3m2!1spt-BR!2sbr!4v1713992056044!5m2!1spt-BR!2sbr"
-          width={screenWidth < 600 ? `${screenWidth - 50}` : '600'}
+          width={
+            screenWidth && screenWidth < 600 ? `${screenWidth - 50}` : '600'
+          }
           height="400"
           className="border-none"
           allowFullScreen
