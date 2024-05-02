@@ -11,19 +11,17 @@ export default function HeaderMenu() {
       >
         Local
       </Link>
-      <button
-        onClick={() => {
-          alert('Liberado em breve. Por enquanto, que tal fazer sua inscrição?')
-        }}
-        className="lg:hover:scale-125 hidden md:flex justify-center items-center flex-[1] md:hover:scale-110 lg:text-xl text-md font-bold h-fit hover:text-yellow-300 focus:text-yellow-300 transition-all"
-      >
-        Check-list
-      </button>
       <Link
         href="/inscricao"
         className="lg:hover:scale-125 md:hover:scale-110 justify-center items-center flex-[1] lg:text-xl text-md font-bold flex h-fit hover:text-yellow-300 focus:text-yellow-300 transition-all"
       >
         Inscrição
+      </Link>
+      <Link
+        href="/#checklist"
+        className="lg:hover:scale-125 justify-center items-center flex-[1] flex md:hover:scale-110 lg:text-xl text-md font-bold h-fit hover:text-yellow-300 focus:text-yellow-300 transition-all"
+      >
+        Check-list
       </Link>
       <button
         onClick={() => {
@@ -33,14 +31,14 @@ export default function HeaderMenu() {
       >
         Entre em contato
       </button>
-      <button
+      {/* <button
         onClick={() => {
           alert('Liberado em breve. Por enquanto, que tal fazer sua inscrição?')
         }}
         className="lg:hover:scale-125 md:hover:scale-110 justify-center items-center flex-[1] lg:text-xl text-md font-bold flex h-fit hover:text-yellow-300 focus:text-yellow-300 transition-all"
       >
         Apadrinhamento
-      </button>
+      </button> */}
     </nav>
   )
 }
