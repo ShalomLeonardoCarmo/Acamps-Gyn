@@ -7,4 +7,11 @@
 			<image:loc>https://acampsgyn.vercel.app/acamps.webp</image:loc>
 		</image:image>
 	</url>
+	<url>
+		<loc>https://acampsgyn.vercel.app/inscricao</loc>
+		<lastmod>2024-04-12T16:00:32+00:00</lastmod>
+		<image:image>
+			<image:loc>https://acampsgyn.vercel.app/acamps.webp</image:loc>
+		</image:image>
+	</url>
 </urlset>
