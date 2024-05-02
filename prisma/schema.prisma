@@ -12,7 +12,7 @@ datasource db {
 }
 
 model registrations {
-  id                         Int      @id @default(autoincrement())
+  id                         Int        @id @default(autoincrement())
   name                       String
   birthdate                  DateTime
   general_registration       String
@@ -31,7 +31,8 @@ model registrations {
   city_name                  String
   address                    String
   payment                    String
-  createdAt                  DateTime @default(now())
+  createdAt                  DateTime   @default(now())
+  servants                   servants[]
 }
 
 model dev_registrations {
@@ -55,4 +56,11 @@ model dev_registrations {
   address                    String
   payment                    String
   createdAt                  DateTime @default(now())
+}
+
+model servants {
+  id             Int           @id @default(autoincrement())
+  registration   registrations @relation(fields: [registrationId], references: [id])
+  createdAt      DateTime      @default(now())
+  registrationId Int
 }
