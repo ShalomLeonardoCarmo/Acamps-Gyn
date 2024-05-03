@@ -82,7 +82,7 @@ export function ServoForm(props: ServoFormProps) {
     formData.payment = newPaymentBlob.url
 
     axios
-      .post('/api/database/create-registration', formData)
+      .post('/api/database/create-servant', formData)
       .then(() => {
         alert('Inscrição realizada com sucesso')
         setRg('')
