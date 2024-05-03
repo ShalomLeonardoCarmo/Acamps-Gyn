@@ -61,6 +61,7 @@ model dev_registrations {
 model servants {
   id             Int           @id @default(autoincrement())
   registration   registrations @relation(fields: [registrationId], references: [id])
+  habilities     Json
   createdAt      DateTime      @default(now())
   registrationId Int
 }
