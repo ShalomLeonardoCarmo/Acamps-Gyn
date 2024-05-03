@@ -98,7 +98,7 @@ export function ServoForm(props: ServoFormProps) {
   }
 
   const {
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
     handleSubmit,
     register,
     watch,
@@ -128,7 +128,6 @@ export function ServoForm(props: ServoFormProps) {
   return (
     <Modal onClose={props.onClose} open={props.show}>
       <div className="bg-red-50 overflow-auto max-h-[90vh] divide-y rounded-xl w-full max-w-[95vw] md:max-w-[730px] lg:max-w-[1000px]">
-        <pre>{JSON.stringify(errors)}</pre>
         <div className="flex flex-col text-center font-semibold p-2">
           <span className="font-bold text-lg">Formulário de inscrição</span>
           <span>Servos</span>
