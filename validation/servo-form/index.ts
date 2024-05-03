@@ -51,7 +51,11 @@ export const servoFormSchema = z.object({
   city_name: z.string().default(''),
   address: z.string(),
   payment: z.string().default(''),
-  member_type: z.number(),
+  member_type: z
+    .string()
+    .default('4')
+    .or(z.number())
+    .transform((member) => parseInt(String(member))),
   habilities: z.object({
     tocar: z.boolean().default(false),
     cozinhar: z.boolean().default(false),
