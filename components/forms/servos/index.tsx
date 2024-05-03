@@ -98,7 +98,7 @@ export function ServoForm(props: ServoFormProps) {
   }
 
   const {
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
     handleSubmit,
     register,
     watch,
@@ -128,6 +128,7 @@ export function ServoForm(props: ServoFormProps) {
   return (
     <Modal onClose={props.onClose} open={props.show}>
       <div className="bg-red-50 overflow-auto max-h-[90vh] divide-y rounded-xl w-full max-w-[95vw] md:max-w-[730px] lg:max-w-[1000px]">
+        <pre>{JSON.stringify(errors)}</pre>
         <div className="flex flex-col text-center font-semibold p-2">
           <span className="font-bold text-lg">Formulário de inscrição</span>
           <span>Servos</span>
@@ -184,6 +185,21 @@ export function ServoForm(props: ServoFormProps) {
                   placeholder="Fulano de Tau"
                 />
                 <ErrorMessage field="name" />
+              </FormField>
+
+              <FormField>
+                <label htmlFor="member_type">Você faz parte da...</label>
+                <select
+                  required
+                  id="member_type"
+                  className="p-2 rounded-xl border border-zinc-600"
+                  {...register('member_type')}
+                >
+                  <option disabled>Selecione uma opção</option>
+                  <option value={1}>Comunidade de Vida</option>
+                  <option value={2}>Comunidade Aliança</option>
+                  <option value={3}>Obra</option>
+                </select>
               </FormField>
 
               <FormField>
