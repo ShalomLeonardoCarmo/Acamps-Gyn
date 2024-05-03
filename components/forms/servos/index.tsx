@@ -208,7 +208,6 @@ export function ServoForm(props: ServoFormProps) {
                       }
                     />
                   </div>
-
                   <div className="flex gap-1 items-center">
                     <label htmlFor="dancar">Dançar/Atuar/Maquiar</label>
                     <input
@@ -237,7 +236,6 @@ export function ServoForm(props: ServoFormProps) {
                       }
                     />
                   </div>
-
                   <div className="flex gap-1 items-center">
                     <label htmlFor="vendas">Sou bom/boa de vendas</label>
                     <input
@@ -280,7 +278,6 @@ export function ServoForm(props: ServoFormProps) {
                       }
                     />
                   </div>
-
                   <div className="flex gap-1 items-center">
                     <label htmlFor="social">
                       Entendo de mídias sociais e programas de edição de
@@ -309,6 +306,72 @@ export function ServoForm(props: ServoFormProps) {
                           'habilities.enfermeiro_medico_socorrista',
                           e.target.checked,
                         )
+                      }
+                    />
+                  </div>
+                  <div className="flex gap-1 items-center">
+                    <label htmlFor="decorar">
+                      Curto decorar e acolher as pessoas
+                    </label>
+                    <input
+                      id="decorar"
+                      type="checkbox"
+                      onChange={(e) =>
+                        setValue(
+                          'habilities.decorar_acolher_pessoas',
+                          e.target.checked,
+                        )
+                      }
+                    />
+                  </div>
+                  <div className="flex gap-1 items-center">
+                    <label htmlFor="organizar">
+                      Organização e segurança é comigo mesmo(a)
+                    </label>
+                    <input
+                      id="organizar"
+                      type="checkbox"
+                      onChange={(e) =>
+                        setValue(
+                          'habilities.organizacao_seguranca',
+                          e.target.checked,
+                        )
+                      }
+                    />
+                  </div>
+                  <div className="flex gap-1 items-center">
+                    <label htmlFor="liturgia">
+                      Gosto de favorecer a experiência dos jovens pela liturgia
+                    </label>
+                    <input
+                      id="liturgia"
+                      type="checkbox"
+                      onChange={(e) =>
+                        setValue('habilities.liturgia', e.target.checked)
+                      }
+                    />
+                  </div>
+                  <div className="flex gap-1 items-center">
+                    <label htmlFor="escutar">
+                      Escutar os jovens é minha alegria
+                    </label>
+                    <input
+                      id="escutar"
+                      type="checkbox"
+                      onChange={(e) =>
+                        setValue('habilities.escutar_jovens', e.target.checked)
+                      }
+                    />
+                  </div>
+                  <div className="flex gap-1 items-center">
+                    <label htmlFor="esctrutura">
+                      Ajudar na estrutura do evento é meu ponto forte
+                    </label>
+                    <input
+                      id="esctrutura"
+                      type="checkbox"
+                      onChange={(e) =>
+                        setValue('habilities.estrutura', e.target.checked)
                       }
                     />
                   </div>
