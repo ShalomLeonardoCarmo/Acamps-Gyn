@@ -76,5 +76,4 @@ export const servoFormSchema = z.object({
       outros: z.string().default(''),
     })
     .default({}),
-  observation: z.string().default(''),
 })
