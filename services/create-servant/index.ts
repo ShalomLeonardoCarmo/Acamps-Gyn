@@ -11,9 +11,7 @@ export async function createServant(
 ) {
   const handledData: ParticipanteFormData = servoFormData
 
-  const newServant = await prisma.registrations.create({ data: { ...handledData, } })
-  const servantHabilities = servoFormData.habilities
-  const servantRelation = await prisma.servants.create({ data: { habilities: servantHabilities, registrationId: newServant.id } })
+  const newServant = await prisma.registrations.create({ data: { ...handledData, servant: true } })
 
-  return { data: { ...newServant, ...servantRelation } }
+  return { data: { ...newServant } }
 }

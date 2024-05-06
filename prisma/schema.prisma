@@ -13,7 +13,7 @@ datasource db {
 
 // Member Type: 1 - Com. Vida; 2 - Com. Aliança; 3 - Obra; 4 - N/A
 model registrations {
-  id                         Int        @id @default(autoincrement())
+  id                         Int      @id @default(autoincrement())
   name                       String
   birthdate                  DateTime
   general_registration       String
@@ -32,10 +32,10 @@ model registrations {
   city_name                  String
   address                    String
   payment                    String
-  servant                    Boolean    @default(false)
-  member_type                Int        @default(4)
-  createdAt                  DateTime   @default(now())
-  servants                   servants[]
+  servant                    Boolean  @default(false)
+  member_type                Int      @default(4)
+  habilities                 Json?
+  createdAt                  DateTime @default(now())
 }
 
 model dev_registrations {
@@ -58,14 +58,7 @@ model dev_registrations {
   city_name                  String
   address                    String
   payment                    String
+  habilities                 Json?
   servant                    Boolean  @default(false)
   createdAt                  DateTime @default(now())
-}
-
-model servants {
-  id             Int           @id @default(autoincrement())
-  registration   registrations @relation(fields: [registrationId], references: [id])
-  habilities     Json
-  createdAt      DateTime      @default(now())
-  registrationId Int
 }

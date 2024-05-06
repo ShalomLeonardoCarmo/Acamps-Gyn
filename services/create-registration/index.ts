@@ -14,7 +14,7 @@ export async function createRegistration(
     env === 'development'
       ? await prisma.dev_registrations.create({ data: { ...participanteFormData, servant: false } })
       : await prisma.registrations.create({
-        data: { ...participanteFormData, servant: false },
+        data: { ...participanteFormData, servant: false, habilities: {} },
       })
 
   console.log(newRegistration)
