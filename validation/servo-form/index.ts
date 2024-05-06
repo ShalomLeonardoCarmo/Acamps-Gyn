@@ -56,22 +56,25 @@ export const servoFormSchema = z.object({
     .default('4')
     .or(z.number())
     .transform((member) => parseInt(String(member))),
-  habilities: z.object({
-    tocar: z.boolean().default(false),
-    cozinhar: z.boolean().default(false),
-    dancar_atuar_maquiar: z.boolean().default(false),
-    relacionamento_com_pessoas: z.boolean().default(false),
-    vendas: z.boolean().default(false),
-    cnh: z.boolean().default(false),
-    balde_vassoura: z.boolean().default(false),
-    planilhas: z.boolean().default(false),
-    midias_sociais_edicao_video_foto: z.boolean().default(false),
-    enfermeiro_medico_socorrista: z.boolean().default(false),
-    decorar_acolher_pessoas: z.boolean().default(false),
-    organizacao_seguranca: z.boolean().default(false),
-    liturgia: z.boolean().default(false),
-    escutar_jovens: z.boolean().default(false),
-    estrutura: z.boolean().default(false),
-  }),
+  habilities: z
+    .object({
+      tocar: z.boolean().default(false),
+      cozinhar: z.boolean().default(false),
+      dancar_atuar_maquiar: z.boolean().default(false),
+      relacionamento_com_pessoas: z.boolean().default(false),
+      vendas: z.boolean().default(false),
+      cnh: z.boolean().default(false),
+      balde_vassoura: z.boolean().default(false),
+      planilhas: z.boolean().default(false),
+      midias_sociais_edicao_video_foto: z.boolean().default(false),
+      enfermeiro_medico_socorrista: z.boolean().default(false),
+      decorar_acolher_pessoas: z.boolean().default(false),
+      organizacao_seguranca: z.boolean().default(false),
+      liturgia: z.boolean().default(false),
+      escutar_jovens: z.boolean().default(false),
+      estrutura: z.boolean().default(false),
+      outros: z.string().default(''),
+    })
+    .default({}),
   observation: z.string().default(''),
 })

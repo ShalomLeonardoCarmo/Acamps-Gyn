@@ -27,6 +27,7 @@ export function ServoForm(props: ServoFormProps) {
   const inputRgFrontRef = useRef<HTMLInputElement>(null)
   const inputRgBackRef = useRef<HTMLInputElement>(null)
   const inputPaymentRef = useRef<HTMLInputElement>(null)
+  const [habilities, setHabilities] = useState(false)
 
   const [rg, setRg] = useState('')
   const servoForm = useForm<ServoFormData>({
@@ -87,6 +88,7 @@ export function ServoForm(props: ServoFormProps) {
         alert('Inscrição realizada com sucesso')
         setRg('')
         reset()
+        setHabilities(false)
         props.onClose()
       })
       .catch((error) => {
@@ -379,16 +381,35 @@ export function ServoForm(props: ServoFormProps) {
                     />
                   </div>
                   <div className="flex gap-1 items-center">
-                    <label htmlFor="esctrutura">
+                    <label htmlFor="estrutura">
                       Ajudar na estrutura do evento é meu ponto forte
                     </label>
                     <input
-                      id="esctrutura"
+                      id="estrutura"
                       type="checkbox"
                       onChange={(e) =>
                         setValue('habilities.estrutura', e.target.checked)
                       }
                     />
+                  </div>
+                  <div className="flex gap-1 items-center col-span-full">
+                    <label htmlFor="outros">Outras habilidades. Quais?</label>
+                    <input
+                      id="outros"
+                      type="checkbox"
+                      onChange={(e) => setHabilities(e.target.checked)}
+                    />
+
+                    {habilities && (
+                      <>
+                        <input
+                          required
+                          placeholder="Digite aqui suas habilidades"
+                          className="p-2 w-full rounded-xl border border-zinc-600"
+                          {...register('habilities.outros')}
+                        />
+                      </>
+                    )}
                   </div>
                 </div>
               </FormField>
