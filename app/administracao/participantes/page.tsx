@@ -1,20 +1,12 @@
-'use client'
 import { MdInfo } from 'react-icons/md'
 
 export default function ParticipantesPage() {
   return (
     <main className="flex flex-1 items-center justify-center p-2">
-      <button
-        onClick={() => {
-          console.log('pa')
-        }}
-      >
-        Clica
-      </button>
-      <table>
-        <thead className="text-center">
+      <table className="bg-red-600 w-full max-w-screen-sm md:max-w-screen-lg">
+        <thead className="text-center text-yellow-200 font-bold text-lg">
           <tr>
-            <th>#</th>
+            <th></th>
             <th>Nome</th>
             <th>Contato</th>
             <th>Data de Nascimento</th>
