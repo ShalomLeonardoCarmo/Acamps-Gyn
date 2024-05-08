@@ -1,5 +1,4 @@
 'use client'
-import { getParticipants } from '@/services/get-participants'
 import { MdInfo } from 'react-icons/md'
 
 export default function ParticipantesPage() {
@@ -7,8 +6,7 @@ export default function ParticipantesPage() {
     <main className="flex flex-1 items-center justify-center p-2">
       <button
         onClick={() => {
-          const pa = getParticipants()
-          console.log(pa)
+          console.log('pa')
         }}
       >
         Clica
