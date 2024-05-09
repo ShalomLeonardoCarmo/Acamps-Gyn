@@ -89,12 +89,19 @@ export default function DetalhesParticipantePage({
               </span>
             </div>
 
-            <div className="flex gap-2">
-              <span className="font-bold">Medicações:</span>
-              <span className="font-semibold">
-                {participant.wich_medication}
-              </span>
-            </div>
+            {participant.frequentlly_use_medication && (
+              <div className="flex gap-2">
+                <span className="font-bold">Medicações:</span>
+                <span className="font-semibold">
+                  {participant.wich_medication.map((medication, index) => (
+                    <div className="flex gap-2" key={index}>
+                      <span>Nome: {medication.medication_name}</span>
+                      <span>Nome: {medication.frequency}</span>
+                    </div>
+                  ))}
+                </span>
+              </div>
+            )}
 
             <div className="flex gap-2">
               <span className="font-bold">RG:</span>
