@@ -4,5 +4,5 @@ import { NextResponse } from 'next/server'
 export async function GET() {
   const participants = await getAllParticipants()
 
-  return NextResponse.json({ data: participants }, { status: 200 })
+  return NextResponse.json(participants, { status: 200 })
 }
