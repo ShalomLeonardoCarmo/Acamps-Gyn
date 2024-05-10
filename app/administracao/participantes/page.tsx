@@ -2,7 +2,7 @@
 import { ParticipanteFormData } from '@/components/forms/participantes'
 import { formatDate } from '@/utils'
 import axios from 'axios'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { MdInfo } from 'react-icons/md'
 
@@ -11,7 +11,6 @@ type Participante = ParticipanteFormData & {
 }
 
 export default function ParticipantesPage() {
-  const { push } = useRouter()
   const [isLoading, setIsLoading] = useState(true)
   const [participants, setParticipants] = useState<Participante[]>([])
   useEffect(() => {
@@ -39,11 +38,9 @@ export default function ParticipantesPage() {
           {participants.map((row) => (
             <tr key={row.id}>
               <td align="center" className="py-2">
-                <button
-                  onClick={() => push(`/administracao/participantes/${row.id}`)}
-                >
+                <Link href={`/administracao/participantes/${row.id}`}>
                   <MdInfo size={25} className="text-yellow-200" />
-                </button>
+                </Link>
               </td>
               <td>{row.name}</td>
               <td>{`${row.responsible_contact.number} (${row.responsible_contact.name})`}</td>
