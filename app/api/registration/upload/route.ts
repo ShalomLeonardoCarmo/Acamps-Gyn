@@ -10,7 +10,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       request,
       onBeforeGenerateToken: async () => {
         return {
-          allowedContentTypes: ['image/jpeg', 'image/png'],
+          allowedContentTypes: ['image/jpeg', 'image/png', 'application/pdf'],
         }
       },
       onUploadCompleted: async ({ blob, tokenPayload }) => {
