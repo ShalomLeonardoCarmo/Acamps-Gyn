@@ -64,7 +64,7 @@ model dev_registrations {
   createdAt                  DateTime @default(now())
 }
 
-model promoitonal_codes {
+model promotional_codes {
   id         Int          @id @default(autoincrement())
   code       String
   used_codes used_codes[]
@@ -72,7 +72,7 @@ model promoitonal_codes {
 
 model used_codes {
   id                  Int               @id @default(autoincrement())
-  promotional_code    promoitonal_codes @relation(fields: [promoitonal_code_id], references: [id])
+  promotional_code    promotional_codes @relation(fields: [promoitonal_code_id], references: [id])
   promoitonal_code_id Int
   registration        registrations     @relation(fields: [registration_id], references: [id])
   registration_id     Int
