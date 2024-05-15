@@ -6,7 +6,12 @@ import { participanteFormSchema } from '@/validation/participante-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { GiCampingTent } from 'react-icons/gi'
-import { MdAddCircle, MdOutlineCancel, MdRemoveCircle } from 'react-icons/md'
+import {
+  MdAddCircle,
+  MdCheck,
+  MdOutlineCancel,
+  MdRemoveCircle,
+} from 'react-icons/md'
 import { z } from 'zod'
 import { ErrorMessage } from '../error-message'
 import FormField from '../field'
@@ -28,6 +33,9 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
   const inputRgBackRef = useRef<HTMLInputElement>(null)
   const inputPaymentRef = useRef<HTMLInputElement>(null)
 
+  const [code, setCode] = useState('')
+  const [codeLoading, setCodeLoading] = useState(false)
+  const [codeAccept, setCodeAccept] = useState(false)
   const [rg, setRg] = useState('')
   const participanteForm = useForm<ParticipanteFormData>({
     resolver: zodResolver(participanteFormSchema),
@@ -116,6 +124,16 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
     name: 'wich_medication',
     control,
   })
+
+  function handleClose() {
+    clearErrors()
+    reset()
+    setCode('')
+    setCodeLoading(false)
+    setCodeAccept(false)
+    setRg('')
+    props.onClose()
+  }
 
   useEffect(() => {
     if (watchMedication && fields.length === 0) {
@@ -464,6 +482,44 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                 />
                 <ErrorMessage field="address" />
               </FormField>
+              <FormField>
+                <label htmlFor="code">Possui o código de pré-inscrito?</label>
+                <div className="flex gap-2">
+                  <input
+                    id="code"
+                    value={code}
+                    disabled={codeAccept}
+                    onChange={(e) => setCode(e.target.value.toUpperCase())}
+                    placeholder="Digite o código aqui"
+                    className="p-2 rounded-xl border border-zinc-600"
+                  />
+                  <button
+                    type="button"
+                    className="bg-red-600 disabled:bg-red-800 flex items-center justify-center gap-1 font-bold p-2 text-white rounded-xl"
+                    disabled={codeLoading || codeAccept}
+                    onClick={() => {
+                      setCodeLoading(true)
+                      axios
+                        .post('/api/registration/promotional-code', {
+                          promotional_code: code,
+                        })
+                        .then(() => {
+                          alert('Código promocional aplicado com sucesso')
+                          setCodeAccept(true)
+                        })
+                        .catch(() => {
+                          alert('Código promocional não encontrado')
+                          setCodeAccept(false)
+                        })
+                        .finally(() => setCodeLoading(false))
+                    }}
+                  >
+                    {codeLoading && <Loadding />}
+                    {codeAccept && <MdCheck />}
+                    {codeAccept ? 'Código aplicado' : 'Enviar código'}
+                  </button>
+                </div>
+              </FormField>
             </div>
 
             <div className="flex flex-col w-full text-center p-2">
@@ -472,13 +528,26 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                 BANCÁRIO, ACESSE O LINK:
               </span>
               <Link
-                href="https://pag.ae/7-srkQQeu"
+                href={
+                  codeAccept
+                    ? 'https://pag.ae/7-srrD-sN'
+                    : 'https://pag.ae/7-srkQQeu'
+                }
                 target="_blank"
                 className="text-blue-600 font-bold text-lg"
               >
-                https://pag.ae/7-srkQQeu
+                {codeAccept
+                  ? 'https://pag.ae/7-srrD-sN'
+                  : 'https://pag.ae/7-srkQQeu'}
               </Link>
+              {codeAccept && (
+                <span className="font-bold">
+                  ATENÇÃO: esse link de pagamento é apenas para os participantes
+                  que realizaram a pré-inscrição
+                </span>
+              )}
             </div>
+
             <div className="flex flex-col w-full text-center p-2">
               <span className="font-bold text-xl">
                 PARA PAGAMENTOS VIA PIX, UTILIZE NOSSA CHAVE PIX:
@@ -498,7 +567,16 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                 </button>
               </Tooltip>
               <span className="font-semibold text-lg">
-                e envie um PIX no valor de R$ 289,90
+                e envie um PIX no valor de R$ {codeAccept ? '259,90' : '289,90'}
+                {codeAccept && (
+                  <>
+                    <br />
+                    <span>
+                      ATENÇÃO: esse valor é apenas para os participantes que
+                      realizaram a pré-inscrição
+                    </span>
+                  </>
+                )}
               </span>
             </div>
 
@@ -526,11 +604,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
               <button
                 type="button"
                 disabled={isSubmitting}
-                onClick={() => {
-                  clearErrors()
-                  reset()
-                  props.onClose()
-                }}
+                onClick={handleClose}
                 className="
               border border-red-500 flex items-center
               justify-center gap-2 p-2 font-semibold text-red-600 rounded-xl
