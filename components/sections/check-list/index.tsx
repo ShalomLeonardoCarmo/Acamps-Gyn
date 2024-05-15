@@ -1,6 +1,11 @@
 'use client'
 
+import { useState } from 'react'
+import TermsModal from './terms-modal'
+
 export function CheckListSection() {
+  const [showTerms, setShowTerms] = useState(false)
+
   return (
     <section
       id="checklist"
@@ -331,13 +336,15 @@ export function CheckListSection() {
             É obrigatório levar documentos e os termos abaixo assinados:
           </span>
           <button
-            className="text-red-600 text-lg font-bold"
-            onClick={() => alert('Documentos serão disponibilizados em breve')}
+            className="text-yellow-200 bg-red-600 transition-shadow rounded-xl text-lg font-bold hover:shadow-xl p-1"
+            onClick={() => setShowTerms(true)}
           >
-            Baixar os termos de autorização obrigatórios.
+            Baixar os termos de autorização obrigatórios
           </button>
         </div>
       </div>
+
+      <TermsModal onClose={() => setShowTerms(false)} show={showTerms} />
     </section>
   )
 }
