@@ -1,2 +1,6 @@
 export * from './create-registration'
 export * from './create-servant'
+export * from './get-all-participants'
+export * from './get-all-servants'
+export * from './get-participant'
+export * from './get-servant'

@@ -4,6 +4,7 @@ export async function getParticipant(id: number | string) {
   const participant = prisma.registrations.findUnique({
     where: {
       id: Number(id),
+      servant: false,
     },
   })
 
