@@ -1,7 +1,6 @@
 'use client'
 import { ParticipanteFormData } from '@/components/forms/participantes'
 import { formatDate } from '@/utils'
-import axios from 'axios'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { MdInfo } from 'react-icons/md'
@@ -14,12 +13,11 @@ export default function ParticipantesPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [participants, setParticipants] = useState<Participante[]>([])
   useEffect(() => {
-    axios
-      .get('/api/participants/')
+    setIsLoading(true)
+    fetch('/api/participants/', { next: { revalidate: 3600 } })
       .then((res) => {
-        setParticipants(res.data)
+        res.json().then((data) => setParticipants(data))
       })
-      .catch((error) => console.error(error))
       .finally(() => setIsLoading(false))
   }, [])
 

@@ -1,7 +1,6 @@
 'use client'
 import { ServoFormData } from '@/components/forms/servos'
 import { formatDate } from '@/utils'
-import axios from 'axios'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { MdInfo } from 'react-icons/md'
@@ -14,12 +13,11 @@ export default function ParticipantesPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [servants, setServants] = useState<Servo[]>([])
   useEffect(() => {
-    axios
-      .get('/api/servants/')
+    setIsLoading(true)
+    fetch('/api/servants/', { next: { revalidate: 3600 } })
       .then((res) => {
-        setServants(res.data)
+        res.json().then((data) => setServants(data))
       })
-      .catch((error) => console.error(error))
       .finally(() => setIsLoading(false))
   }, [])
 
