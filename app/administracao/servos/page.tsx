@@ -57,7 +57,7 @@ export default function ParticipantesPage() {
             )}
             {!isLoading && servants.length && (
               <td colSpan={4} align="center" className="p-2">
-                Total: {servants.length} participantes
+                Total: {servants.length} servos
               </td>
             )}
           </tr>
