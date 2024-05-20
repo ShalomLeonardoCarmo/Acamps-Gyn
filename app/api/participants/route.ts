@@ -1,5 +1,3 @@
-'use server'
-
 import { getAllParticipants } from '@/services/get-all-participants'
 import { NextResponse } from 'next/server'
 
