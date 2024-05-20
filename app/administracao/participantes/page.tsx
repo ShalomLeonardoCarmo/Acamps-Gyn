@@ -14,7 +14,7 @@ export default function ParticipantesPage() {
   const [participants, setParticipants] = useState<Participante[]>([])
   useEffect(() => {
     setIsLoading(true)
-    fetch('/api/participants/', { next: { revalidate: 3600 } })
+    fetch('/api/participants/', { cache: 'no-store' })
       .then((res) => {
         res.json().then((data) => setParticipants(data))
       })

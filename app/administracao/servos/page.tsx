@@ -14,7 +14,7 @@ export default function ParticipantesPage() {
   const [servants, setServants] = useState<Servo[]>([])
   useEffect(() => {
     setIsLoading(true)
-    fetch('/api/servants/', { next: { revalidate: 3600 } })
+    fetch('/api/servants/', { cache: 'no-store' })
       .then((res) => {
         res.json().then((data) => setServants(data))
       })
