@@ -9,6 +9,8 @@ type Servo = ServoFormData & {
   id: number
 }
 
+export const revalidate = 0
+
 export default function ParticipantesPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [servants, setServants] = useState<Servo[]>([])

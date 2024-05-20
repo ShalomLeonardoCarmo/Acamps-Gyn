@@ -9,6 +9,8 @@ type Participante = ParticipanteFormData & {
   id: number
 }
 
+export const revalidate = 0
+
 export default function ParticipantesPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [participants, setParticipants] = useState<Participante[]>([])
