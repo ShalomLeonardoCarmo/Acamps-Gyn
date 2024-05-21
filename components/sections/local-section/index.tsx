@@ -61,7 +61,7 @@ export default function LocalSection() {
 
       {map === 1 ? (
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3817.5036034434384!2d-49.2986989!3d-16.900432900000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935efe115769c01f%3A0x3b9a05e5e623340e!2sEspa%C3%A7o%20Arvoredo!5e0!3m2!1spt-BR!2sbr!4v1716317312526!5m2!1spt-BR!2sb"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3817.5036034434384!2d-49.2986989!3d-16.900432900000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935efe115769c01f%3A0x3b9a05e5e623340e!2sEspa%C3%A7o%20Arvoredo!5e0!3m2!1spt-BR!2sbr!4v1716317573703!5m2!1spt-BR!2sbr"
           width={
             screenWidth && screenWidth < 600 ? `${screenWidth - 50}` : '600'
           }
