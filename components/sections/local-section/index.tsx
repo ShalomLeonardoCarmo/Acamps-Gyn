@@ -42,12 +42,12 @@ export default function LocalSection() {
 
       <div className="flex gap-1">
         <Link
-          href="https://maps.app.goo.gl/gc6MFAPFtCVkC4Q78"
+          href="https://maps.app.goo.gl/XKhuSVbMRuxS7Ge88"
           target="_blank"
           className="text-orange-400 hover:text-red-600 hover:underline font-bold flex gap-2 items-center justify-center"
         >
           <MdPlace size={25} className="text-red-600" />
-          Local do Acampamento: Chácara Dois Corações - Hidrolândia/GO
+          Local do Acampamento: Espaço Arvoredo - Hidrolândia/GO
         </Link>
         {map === 2 && (
           <button
