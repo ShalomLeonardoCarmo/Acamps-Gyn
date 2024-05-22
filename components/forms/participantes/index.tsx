@@ -29,6 +29,12 @@ export interface ParticipanteFormProps {
 export type ParticipanteFormData = z.infer<typeof participanteFormSchema>
 
 export function ParticipanteForm(props: ParticipanteFormProps) {
+  const now = new Date()
+  const day = now.getDay()
+  const month = now.getMonth()
+  const secondLote = month > 5 || (month === 5 && day > 21)
+  console.log(now)
+
   const inputRgFrontRef = useRef<HTMLInputElement>(null)
   const inputRgBackRef = useRef<HTMLInputElement>(null)
   const inputPaymentRef = useRef<HTMLInputElement>(null)
@@ -567,7 +573,14 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                 </button>
               </Tooltip>
               <span className="font-semibold text-lg">
-                e envie um PIX no valor de R$ {codeAccept ? '259,90' : '289,90'}
+                e envie um PIX no valor de R${' '}
+                {codeAccept
+                  ? secondLote
+                    ? '279,90'
+                    : '259,90'
+                  : secondLote
+                    ? '309,90'
+                    : '289,90'}
                 {codeAccept && (
                   <>
                     <br />
