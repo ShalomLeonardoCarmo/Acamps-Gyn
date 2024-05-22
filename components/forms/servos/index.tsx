@@ -29,12 +29,6 @@ export interface ServoFormProps {
 export type ServoFormData = z.infer<typeof servoFormSchema>
 
 export function ServoForm(props: ServoFormProps) {
-  const now = new Date()
-  const day = now.getDay()
-  const month = now.getMonth()
-  const secondLote = month > 5 || (month === 5 && day > 21)
-  console.log(now)
-
   const inputRgFrontRef = useRef<HTMLInputElement>(null)
   const inputRgBackRef = useRef<HTMLInputElement>(null)
   const inputPaymentRef = useRef<HTMLInputElement>(null)
@@ -761,21 +755,21 @@ export function ServoForm(props: ServoFormProps) {
 
             <div className="flex flex-col w-full text-center p-2">
               <span className="font-bold text-xl">
-                PARA REALIZAR O PAGAMENTO VIA CARTÃO DE CRÉDITO OU BOLETO
-                BANCÁRIO, ACESSE O LINK:
+                PARA REALIZAR O PAGAMENTO VIA CARTÃO DE CRÉDITO, BOLETO BANCÁRIO
+                OU PIX, ACESSE O LINK:
               </span>
               <Link
                 href={
                   codeAccept
-                    ? 'https://pag.ae/7-srq2xcG'
-                    : 'https://pag.ae/7-srnUcsN'
+                    ? 'https://pag.ae/7-ydJYysQ'
+                    : 'https://pag.ae/7-ydHjDX9'
                 }
                 target="_blank"
                 className="text-blue-600 font-bold text-lg"
               >
                 {codeAccept
-                  ? 'https://pag.ae/7-srq2xcG'
-                  : 'https://pag.ae/7-srnUcsN'}
+                  ? 'https://pag.ae/7-ydJYysQ'
+                  : 'https://pag.ae/7-ydHjDX9'}
               </Link>
               {codeAccept && (
                 <span className="font-bold">
@@ -786,7 +780,7 @@ export function ServoForm(props: ServoFormProps) {
             </div>
             <div className="flex flex-col w-full text-center p-2">
               <span className="font-bold text-xl">
-                PARA PAGAMENTOS VIA PIX, UTILIZE NOSSA CHAVE PIX:
+                OU SE PREFERIR, UTILIZE NOSSA CHAVE PIX:
               </span>
               <Tooltip text="Clique para copiar">
                 <button
@@ -803,14 +797,7 @@ export function ServoForm(props: ServoFormProps) {
                 </button>
               </Tooltip>
               <span className="font-semibold text-lg">
-                e envie um PIX no valor de R${' '}
-                {codeAccept
-                  ? secondLote
-                    ? '179,90'
-                    : '159,90'
-                  : secondLote
-                    ? '209,90'
-                    : '189,90'}
+                e envie um PIX no valor de R$ {codeAccept ? '179,90' : '209,90'}
                 {codeAccept && (
                   <>
                     <br />

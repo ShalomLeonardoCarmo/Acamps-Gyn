@@ -29,12 +29,6 @@ export interface ParticipanteFormProps {
 export type ParticipanteFormData = z.infer<typeof participanteFormSchema>
 
 export function ParticipanteForm(props: ParticipanteFormProps) {
-  const now = new Date()
-  const day = now.getDay()
-  const month = now.getMonth()
-  const secondLote = month > 5 || (month === 5 && day > 21)
-  console.log(now)
-
   const inputRgFrontRef = useRef<HTMLInputElement>(null)
   const inputRgBackRef = useRef<HTMLInputElement>(null)
   const inputPaymentRef = useRef<HTMLInputElement>(null)
@@ -530,21 +524,15 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
 
             <div className="flex flex-col w-full text-center p-2">
               <span className="font-bold text-xl">
-                PARA REALIZAR O PAGAMENTO VIA CARTÃO DE CRÉDITO OU BOLETO
-                BANCÁRIO, ACESSE O LINK:
+                PARA REALIZAR O PAGAMENTO VIA CARTÃO DE CRÉDITO, BOLETO BANCÁRIO
+                OU PIX, ACESSE O LINK:
               </span>
               <Link
-                href={
-                  codeAccept
-                    ? 'https://pag.ae/7-srrD-sN'
-                    : 'https://pag.ae/7-srkQQeu'
-                }
+                href={codeAccept ? 'https://pag.ae/7-ydEwR-v' : ''}
                 target="_blank"
                 className="text-blue-600 font-bold text-lg"
               >
-                {codeAccept
-                  ? 'https://pag.ae/7-srrD-sN'
-                  : 'https://pag.ae/7-srkQQeu'}
+                {codeAccept ? 'https://pag.ae/7-ydEwR-v' : ''}
               </Link>
               {codeAccept && (
                 <span className="font-bold">
@@ -556,7 +544,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
 
             <div className="flex flex-col w-full text-center p-2">
               <span className="font-bold text-xl">
-                PARA PAGAMENTOS VIA PIX, UTILIZE NOSSA CHAVE PIX:
+                OU SE PREFERIR, UTILIZE NOSSA CHAVE PIX:
               </span>
               <Tooltip text="Clique para copiar">
                 <button
@@ -573,14 +561,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                 </button>
               </Tooltip>
               <span className="font-semibold text-lg">
-                e envie um PIX no valor de R${' '}
-                {codeAccept
-                  ? secondLote
-                    ? '279,90'
-                    : '259,90'
-                  : secondLote
-                    ? '309,90'
-                    : '289,90'}
+                e envie um PIX no valor de R$ {codeAccept ? '279,90' : '309,90'}
                 {codeAccept && (
                   <>
                     <br />
