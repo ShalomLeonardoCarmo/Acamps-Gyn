@@ -528,11 +528,17 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                 OU PIX, ACESSE O LINK:
               </span>
               <Link
-                href={codeAccept ? 'https://pag.ae/7-ydEwR-v' : ''}
+                href={
+                  codeAccept
+                    ? 'https://pag.ae/7-yhfjqB9'
+                    : 'https://pag.ae/7-ydEwR-v'
+                }
                 target="_blank"
                 className="text-blue-600 font-bold text-lg"
               >
-                {codeAccept ? 'https://pag.ae/7-ydEwR-v' : ''}
+                {codeAccept
+                  ? 'https://pag.ae/7-yhfjqB9'
+                  : 'https://pag.ae/7-ydEwR-v'}
               </Link>
               {codeAccept && (
                 <span className="font-bold">
