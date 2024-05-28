@@ -18,8 +18,9 @@ import { z } from 'zod'
 import { ErrorMessage } from '../error-message'
 import FormField from '../field'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { upload } from '@vercel/blob/client'
+// import { upload } from '@vercel/blob/client'
 import axios from 'axios'
+import { uploadFileSupabase } from '@/services'
 
 export interface ServoFormProps {
   show: boolean
@@ -71,34 +72,49 @@ export function ServoForm(props: ServoFormProps) {
     const rgBackFile = inputRgBackRef.current.files[0]
     const paymentFile = inputPaymentRef.current.files[0]
 
-    const newRgFrontBlob = await upload(
-      `${getValues('general_registration')}-front`,
+    const rgFrontData = await uploadFileSupabase(
       rgFrontFile,
-      {
-        access: 'public',
-        handleUploadUrl: '/api/registration/upload',
-      },
-    )
-    const newRgBackBlob = await upload(
-      `${getValues('general_registration')}-back`,
-      rgBackFile,
-      {
-        access: 'public',
-        handleUploadUrl: '/api/registration/upload',
-      },
-    )
-    const newPaymentBlob = await upload(
-      `${getValues('general_registration')}-payment`,
-      paymentFile,
-      {
-        access: 'public',
-        handleUploadUrl: '/api/payment/upload',
-      },
+      `rg - frente/${getValues('general_registration')}-front.${rgFrontFile.name.split('.').pop()}`,
     )
 
-    formData.general_registration_back = newRgBackBlob.url
-    formData.general_registration_front = newRgFrontBlob.url
-    formData.payment = newPaymentBlob.url
+    const rgBackData = await uploadFileSupabase(
+      rgBackFile,
+      `rg - verso/${getValues('general_registration')}-back.${rgBackFile.name.split('.').pop()}`,
+    )
+
+    const paymentData = await uploadFileSupabase(
+      paymentFile,
+      `pagamento/${getValues('general_registration')}-payment.${paymentFile.name.split('.').pop()}`,
+    )
+
+    // const newRgFrontBlob = await upload(
+    //   `${getValues('general_registration')}-front`,
+    //   rgFrontFile,
+    //   {
+    //     access: 'public',
+    //     handleUploadUrl: '/api/registration/upload',
+    //   },
+    // )
+    // const newRgBackBlob = await upload(
+    //   `${getValues('general_registration')}-back`,
+    //   rgBackFile,
+    //   {
+    //     access: 'public',
+    //     handleUploadUrl: '/api/registration/upload',
+    //   },
+    // )
+    // const newPaymentBlob = await upload(
+    //   `${getValues('general_registration')}-payment`,
+    //   paymentFile,
+    //   {
+    //     access: 'public',
+    //     handleUploadUrl: '/api/payment/upload',
+    //   },
+    // )
+
+    formData.general_registration_back = rgBackData ? rgBackData.path : ''
+    formData.general_registration_front = rgFrontData?.path || ''
+    formData.payment = paymentData?.path || ''
 
     axios
       .post('/api/database/create-servant', formData)
