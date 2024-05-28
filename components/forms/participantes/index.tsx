@@ -17,9 +17,9 @@ import { ErrorMessage } from '../error-message'
 import FormField from '../field'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import axios from 'axios'
-import { upload } from '@vercel/blob/client'
 import Link from 'next/link'
 import Tooltip from '@/components/tootlip'
+import { uploadFileSupabase } from '@/services'
 
 export interface ParticipanteFormProps {
   show: boolean
@@ -60,34 +60,22 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
     const rgBackFile = inputRgBackRef.current.files[0]
     const paymentFile = inputPaymentRef.current.files[0]
 
-    const newRgFrontBlob = await upload(
-      `${getValues('general_registration')}-front`,
+    const rgFrontData = await uploadFileSupabase(
       rgFrontFile,
-      {
-        access: 'public',
-        handleUploadUrl: '/api/registration/upload',
-      },
+      `rg - frente/${getValues('general_registration')}-front.${rgFrontFile.name.split('.').pop()}`,
     )
-    const newRgBackBlob = await upload(
-      `${getValues('general_registration')}-back`,
+    const rgBackData = await uploadFileSupabase(
       rgBackFile,
-      {
-        access: 'public',
-        handleUploadUrl: '/api/registration/upload',
-      },
+      `rg - verso/${getValues('general_registration')}-back.${rgBackFile.name.split('.').pop()}`,
     )
-    const newPaymentBlob = await upload(
-      `${getValues('general_registration')}-payment`,
+    const paymentData = await uploadFileSupabase(
       paymentFile,
-      {
-        access: 'public',
-        handleUploadUrl: '/api/payment/upload',
-      },
+      `pagamento/${getValues('general_registration')}-payment.${paymentFile.name.split('.').pop()}`,
     )
 
-    formData.general_registration_back = newRgBackBlob.url
-    formData.general_registration_front = newRgFrontBlob.url
-    formData.payment = newPaymentBlob.url
+    formData.general_registration_back = rgBackData
+    formData.general_registration_front = rgFrontData
+    formData.payment = paymentData
 
     axios
       .post('/api/database/create-registration', formData)

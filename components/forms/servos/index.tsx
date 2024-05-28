@@ -76,45 +76,18 @@ export function ServoForm(props: ServoFormProps) {
       rgFrontFile,
       `rg - frente/${getValues('general_registration')}-front.${rgFrontFile.name.split('.').pop()}`,
     )
-
     const rgBackData = await uploadFileSupabase(
       rgBackFile,
       `rg - verso/${getValues('general_registration')}-back.${rgBackFile.name.split('.').pop()}`,
     )
-
     const paymentData = await uploadFileSupabase(
       paymentFile,
       `pagamento/${getValues('general_registration')}-payment.${paymentFile.name.split('.').pop()}`,
     )
 
-    // const newRgFrontBlob = await upload(
-    //   `${getValues('general_registration')}-front`,
-    //   rgFrontFile,
-    //   {
-    //     access: 'public',
-    //     handleUploadUrl: '/api/registration/upload',
-    //   },
-    // )
-    // const newRgBackBlob = await upload(
-    //   `${getValues('general_registration')}-back`,
-    //   rgBackFile,
-    //   {
-    //     access: 'public',
-    //     handleUploadUrl: '/api/registration/upload',
-    //   },
-    // )
-    // const newPaymentBlob = await upload(
-    //   `${getValues('general_registration')}-payment`,
-    //   paymentFile,
-    //   {
-    //     access: 'public',
-    //     handleUploadUrl: '/api/payment/upload',
-    //   },
-    // )
-
-    formData.general_registration_back = rgBackData ? rgBackData.path : ''
-    formData.general_registration_front = rgFrontData?.path || ''
-    formData.payment = paymentData?.path || ''
+    formData.general_registration_back = rgBackData
+    formData.general_registration_front = rgFrontData
+    formData.payment = paymentData
 
     axios
       .post('/api/database/create-servant', formData)
