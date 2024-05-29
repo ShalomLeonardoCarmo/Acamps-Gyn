@@ -271,25 +271,17 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
 
                 {responsible && (
                   <FormField>
-                    <label htmlFor="general_registration">
-                      Número de CPF *
-                    </label>
+                    <label htmlFor="cpf">Número de CPF *</label>
                     <input
                       required
                       type="text"
                       maxLength={12}
-                      id="general_registration"
-                      placeholder="0123456789-1"
+                      id="cpf"
+                      placeholder="Digite o seu CPF"
                       className="border border-zinc-600 rounded-xl p-2"
-                      {...register('general_registration')}
-                      onChange={(e) => {
-                        let newRg = e.target.value
-                        newRg = newRg.replace(/[^0-9]/g, '')
-                        newRg = newRg.replace(/(\d{10})(\d)/, '$1-$2')
-                        setRg(newRg)
-                      }}
+                      {...register('cpf')}
                     />
-                    <ErrorMessage field="general_registration" />
+                    <ErrorMessage field="cpf" />
                   </FormField>
                 )}
 
