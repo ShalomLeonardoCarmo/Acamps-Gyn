@@ -9,6 +9,7 @@ export const servoFormSchema = z.object({
     console.log(new Date(val).toISOString())
     return new Date(val).toISOString()
   }),
+  cpf: z.nullable(z.string().default('')),
   general_registration: z
     .string()
     .transform((str) => str.replace(/[^0-9]/g, '')),

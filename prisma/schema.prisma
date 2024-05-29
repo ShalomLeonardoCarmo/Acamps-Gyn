@@ -16,6 +16,7 @@ model registrations {
   id                         Int          @id @default(autoincrement())
   name                       String
   birthdate                  DateTime
+  cpf                        String?
   general_registration       String
   general_registration_front String
   general_registration_back  String

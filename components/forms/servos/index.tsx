@@ -13,6 +13,8 @@ import {
   MdRemoveCircle,
   MdOutlineCancel,
   MdCheck,
+  MdCheckCircle,
+  MdOutlineCheckCircle,
 } from 'react-icons/md'
 import { z } from 'zod'
 import { ErrorMessage } from '../error-message'
@@ -21,6 +23,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 // import { upload } from '@vercel/blob/client'
 import axios from 'axios'
 import { uploadFileSupabase } from '@/services'
+import TermsModal from '@/components/terms'
 
 export interface ServoFormProps {
   show: boolean
@@ -34,6 +37,10 @@ export function ServoForm(props: ServoFormProps) {
   const inputRgBackRef = useRef<HTMLInputElement>(null)
   const inputPaymentRef = useRef<HTMLInputElement>(null)
   const [habilities, setHabilities] = useState(false)
+
+  const [responsible, setResponsible] = useState(false)
+  const [openTermsModal, setOpenTermsModal] = useState(false)
+  const [accept, setAccept] = useState(false)
 
   const [code, setCode] = useState('')
   const [codeLoading, setCodeLoading] = useState(false)
@@ -120,6 +127,7 @@ export function ServoForm(props: ServoFormProps) {
 
   const watchMedication = watch('frequentlly_use_medication')
   const watchWichCity = watch('wich_city')
+  const watchBirthdate = watch('birthdate')
 
   const { fields, append, remove } = useFieldArray({
     name: 'wich_medication',
@@ -133,6 +141,42 @@ export function ServoForm(props: ServoFormProps) {
       remove()
     }
   }, [append, fields.length, remove, watchMedication])
+
+  useEffect(() => {
+    const birthdate = getValues('birthdate').split('-')
+    if (birthdate.length === 3) {
+      const time = Date.now()
+      const now = new Date(time)
+      const year = now.getFullYear()
+      const month = now.getMonth() + 1
+      const day = now.getDate()
+      const bYear = Number(birthdate[0])
+      const bMonth = Number(birthdate[1])
+      const bDay = Number(birthdate[2])
+
+      if (bYear > 1900) {
+        if (year - bYear > 18) {
+          setResponsible(true)
+        } else if (year - bYear === 18) {
+          if (month > bMonth) {
+            console.log('Sim')
+            setResponsible(true)
+          } else if (month === bMonth) {
+            if (day >= bDay) {
+              setResponsible(true)
+            } else {
+              setResponsible(false)
+            }
+          } else {
+            console.log('Sim 3')
+            setResponsible(false)
+          }
+        } else {
+          setResponsible(false)
+        }
+      }
+    }
+  }, [getValues, watchBirthdate])
 
   return (
     <Modal onClose={props.onClose} open={props.show}>
@@ -432,6 +476,28 @@ export function ServoForm(props: ServoFormProps) {
                 />
                 <ErrorMessage field="birthdate" />
               </FormField>
+
+              {responsible && (
+                <FormField>
+                  <label htmlFor="general_registration">Número de CPF *</label>
+                  <input
+                    required
+                    type="text"
+                    maxLength={12}
+                    id="general_registration"
+                    placeholder="0123456789-1"
+                    className="border border-zinc-600 rounded-xl p-2"
+                    {...register('general_registration')}
+                    onChange={(e) => {
+                      let newRg = e.target.value
+                      newRg = newRg.replace(/[^0-9]/g, '')
+                      newRg = newRg.replace(/(\d{10})(\d)/, '$1-$2')
+                      setRg(newRg)
+                    }}
+                  />
+                  <ErrorMessage field="general_registration" />
+                </FormField>
+              )}
 
               <FormField>
                 <label htmlFor="general_registration">Número de RG *</label>
@@ -805,10 +871,37 @@ export function ServoForm(props: ServoFormProps) {
               <ErrorMessage field="payment" />
             </div>
 
+            {responsible && (
+              <>
+                <div className="flex w-full p-2 justify-center">
+                  <button
+                    className="flex gap-1 items-center"
+                    type="button"
+                    onClick={() => setOpenTermsModal(true)}
+                  >
+                    {accept ? (
+                      <MdCheckCircle size={20} className="text-red-600" />
+                    ) : (
+                      <MdOutlineCheckCircle size={20} />
+                    )}
+                    Eu li e concordo com os termos de uso de imagem, voz e nome
+                  </button>
+                </div>
+                <TermsModal
+                  accept={accept}
+                  setAccept={setAccept}
+                  onClose={() => {
+                    setOpenTermsModal(false)
+                  }}
+                  show={openTermsModal}
+                />
+              </>
+            )}
+
             <div className="flex gap-2 p-2 w-full items-center justify-center">
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || (responsible && !accept)}
                 className="
                 disabled:bg-red-800
               bg-red-600 flex items-center justify-center
