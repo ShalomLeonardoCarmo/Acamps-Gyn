@@ -76,7 +76,7 @@ export default function DetalhesParticipantePage({
                 typeof obj === 'boolean' && obj ? (
                   <>{`${habilities[index]}, `}</>
                 ) : typeof obj === 'string' ? (
-                  <>Outras Habilidades: {obj}</>
+                  <>{`${obj}, `}</>
                 ) : (
                   <></>
                 ),
