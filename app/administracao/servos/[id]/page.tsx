@@ -14,6 +14,24 @@ export default function DetalhesParticipantePage({
 }: {
   params: { id: number }
 }) {
+  const habilities = [
+    'Tocar/Cantar',
+    'Cozinhar',
+    'Dançar/Atuar/Maquiar',
+    'Relacionamento com Pessoas',
+    'Vendas',
+    'Tem CNH',
+    'Balde/Vassoura',
+    'Planilhas',
+    'Mídias Sociais & Programas de edição de foto/vídeo',
+    'Enfermeir(a)/Médico(a)/Socorrista',
+    'Decorar e Acolher',
+    'Organização e Segurança',
+    'Liturgia',
+    'Escutar os Jovens',
+    'Estrutura',
+    'Outras',
+  ]
   const [isLoading, setIsLoading] = useState(true)
   const [servant, setServant] = useState<Servo>()
   useEffect(() => {
@@ -45,6 +63,19 @@ export default function DetalhesParticipantePage({
               >
                 Comprovante de pagamento
               </Link>
+
+              <div className="flex gap-2">
+                <span className="font-bold">Habilidades:</span>
+                {Object.values(servant.habilities).map((obj, index) =>
+                  typeof obj === 'boolean' && obj ? (
+                    <>{habilities[index]}</>
+                  ) : typeof obj === 'string' ? (
+                    <>Outras Habilidades: {obj}</>
+                  ) : (
+                    <></>
+                  ),
+                )}
+              </div>
             </div>
 
             <div className="flex gap-2">
