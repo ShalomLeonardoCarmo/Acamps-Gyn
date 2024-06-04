@@ -72,15 +72,17 @@ export default function DetalhesParticipantePage({
 
             <div className="flex gap-2">
               <span className="font-bold">Habilidades:</span>
-              {Object.values(servant.habilities).map((obj, index) =>
-                typeof obj === 'boolean' && obj ? (
-                  <>{`${habilities[index]}, `}</>
-                ) : typeof obj === 'string' && obj.length > 0 ? (
-                  <>{`${obj}, `}</>
-                ) : (
-                  <></>
-                ),
-              )}
+              <span>
+                {Object.values(servant.habilities).map((obj, index) =>
+                  typeof obj === 'boolean' && obj ? (
+                    <>{`${habilities[index]}, `}</>
+                  ) : typeof obj === 'string' && obj.length > 0 ? (
+                    <>{`${obj}, `}</>
+                  ) : (
+                    <></>
+                  ),
+                )}
+              </span>
             </div>
 
             <div className="flex gap-2">

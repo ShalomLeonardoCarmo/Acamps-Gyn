@@ -9,6 +9,7 @@ import { GiCampingTent } from 'react-icons/gi'
 import {
   MdAddCircle,
   MdCheckCircle,
+  MdDownload,
   MdOutlineCancel,
   MdOutlineCheckCircle,
   MdRemoveCircle,
@@ -580,7 +581,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                 <ErrorMessage field="payment" />
               </div>
 
-              {responsible && (
+              {responsible ? (
                 <>
                   <div className="flex w-full p-2 justify-center">
                     <button
@@ -606,6 +607,45 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                     show={openTermsModal}
                   />
                 </>
+              ) : (
+                getValues('birthdate') &&
+                getValues('birthdate').split('-').length === 3 && (
+                  <>
+                    <div className="flex w-full p-2 justify-center flex-col gap-1 items-center">
+                      <span className="text-center font-semibold">
+                        ATENÇÃO: É obrigatório levar o termo abaixo assinado por
+                        seus responsáveis no dia do acampamento (10 de julho de
+                        2024), ou enviá-los digitalmente por meio de nossos{' '}
+                        <Link
+                          className="hover:underline font-bold text-red-600"
+                          target="_blank"
+                          href={'/contato'}
+                        >
+                          CANAIS DE COMUNICAÇÃO
+                        </Link>
+                      </span>
+                      <Link
+                        target="_blank"
+                        href={
+                          '/Menor-%20TERMO%20DE%20AUTORIZA%C3%87%C3%83O%20DE%20USO%20DE%20IMAGEM,%20VOZ%20E%20NOME.pdf'
+                        }
+                        className="bg-red-600 flex flex-col sm:flex-row items-center justify-center gap-1 w-fit rounded-xl p-2 font-semibold text-yellow-200"
+                      >
+                        <MdDownload size={20} />
+                        TERMO DE AUTORIZAÇÃO DE USO DE IMAGEM, VOZ E NOME PARA
+                        MENORES DE IDADE
+                      </Link>
+                    </div>
+                    <TermsModal
+                      accept={accept}
+                      setAccept={setAccept}
+                      onClose={() => {
+                        setOpenTermsModal(false)
+                      }}
+                      show={openTermsModal}
+                    />
+                  </>
+                )
               )}
 
               <div className="flex gap-2 p-2 w-full items-center justify-center">
