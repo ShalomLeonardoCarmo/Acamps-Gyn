@@ -5,6 +5,7 @@ export async function getAllParticipants() {
     where: {
       servant: false,
     },
+    orderBy: [{ name: 'asc' }, { birthdate: 'desc' }],
   })
 
   return participants
