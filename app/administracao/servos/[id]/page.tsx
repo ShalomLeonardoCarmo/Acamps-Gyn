@@ -63,24 +63,24 @@ export default function DetalhesParticipantePage({
               >
                 Comprovante de pagamento
               </Link>
-
-              <div className="flex gap-2">
-                <span className="font-bold">Habilidades:</span>
-                {Object.values(servant.habilities).map((obj, index) =>
-                  typeof obj === 'boolean' && obj ? (
-                    <>{habilities[index]}</>
-                  ) : typeof obj === 'string' ? (
-                    <>Outras Habilidades: {obj}</>
-                  ) : (
-                    <></>
-                  ),
-                )}
-              </div>
             </div>
 
             <div className="flex gap-2">
               <span className="font-bold">Nome:</span>
               <span>{servant.name}</span>
+            </div>
+
+            <div className="flex gap-2">
+              <span className="font-bold">Habilidades:</span>
+              {Object.values(servant.habilities).map((obj, index) =>
+                typeof obj === 'boolean' && obj ? (
+                  <>{`${habilities[index]}, `}</>
+                ) : typeof obj === 'string' ? (
+                  <>Outras Habilidades: {obj}</>
+                ) : (
+                  <></>
+                ),
+              )}
             </div>
 
             <div className="flex gap-2">
