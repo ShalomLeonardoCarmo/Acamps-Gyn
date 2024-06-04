@@ -75,7 +75,7 @@ export default function DetalhesParticipantePage({
               {Object.values(servant.habilities).map((obj, index) =>
                 typeof obj === 'boolean' && obj ? (
                   <>{`${habilities[index]}, `}</>
-                ) : typeof obj === 'string' ? (
+                ) : typeof obj === 'string' && obj.length > 0 ? (
                   <>{`${obj}, `}</>
                 ) : (
                   <></>
