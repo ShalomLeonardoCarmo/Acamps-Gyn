@@ -8,7 +8,6 @@ import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { GiCampingTent } from 'react-icons/gi'
 import {
   MdAddCircle,
-  MdCheck,
   MdCheckCircle,
   MdOutlineCancel,
   MdOutlineCheckCircle,
@@ -39,10 +38,6 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
   const [responsible, setResponsible] = useState(false)
   const [openTermsModal, setOpenTermsModal] = useState(false)
   const [accept, setAccept] = useState(false)
-
-  const [code, setCode] = useState('')
-  const [codeLoading, setCodeLoading] = useState(false)
-  const [codeAccept, setCodeAccept] = useState(false)
   const [rg, setRg] = useState('')
   const participanteForm = useForm<ParticipanteFormData>({
     resolver: zodResolver(participanteFormSchema),
@@ -126,9 +121,6 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
     setOpenTermsModal(false)
     setAccept(false)
     reset()
-    setCode('')
-    setCodeLoading(false)
-    setCodeAccept(false)
     setRg('')
     props.onClose()
   }
@@ -543,44 +535,6 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                   />
                   <ErrorMessage field="address" />
                 </FormField>
-                <FormField>
-                  <label htmlFor="code">Possui o código de pré-inscrito?</label>
-                  <div className="flex gap-2">
-                    <input
-                      id="code"
-                      value={code}
-                      disabled={codeAccept}
-                      onChange={(e) => setCode(e.target.value.toUpperCase())}
-                      placeholder="Digite o código aqui"
-                      className="p-2 rounded-xl border border-zinc-600"
-                    />
-                    <button
-                      type="button"
-                      className="bg-red-600 disabled:bg-red-800 flex items-center justify-center gap-1 font-bold p-2 text-white rounded-xl"
-                      disabled={codeLoading || codeAccept}
-                      onClick={() => {
-                        setCodeLoading(true)
-                        axios
-                          .post('/api/registration/promotional-code', {
-                            promotional_code: code,
-                          })
-                          .then(() => {
-                            alert('Código promocional aplicado com sucesso')
-                            setCodeAccept(true)
-                          })
-                          .catch(() => {
-                            alert('Código promocional não encontrado')
-                            setCodeAccept(false)
-                          })
-                          .finally(() => setCodeLoading(false))
-                      }}
-                    >
-                      {codeLoading && <Loadding />}
-                      {codeAccept && <MdCheck />}
-                      {codeAccept ? 'Código aplicado' : 'Enviar código'}
-                    </button>
-                  </div>
-                </FormField>
               </div>
 
               <div className="flex flex-col w-full text-center p-2">
@@ -589,24 +543,12 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                   BANCÁRIO OU PIX, ACESSE O LINK:
                 </span>
                 <Link
-                  href={
-                    codeAccept
-                      ? 'https://pag.ae/7-yhfjqB9'
-                      : 'https://pag.ae/7-ydEwR-v'
-                  }
+                  href="https://pag.ae/7-ydEwR-v"
                   target="_blank"
                   className="text-blue-600 font-bold text-lg"
                 >
-                  {codeAccept
-                    ? 'https://pag.ae/7-yhfjqB9'
-                    : 'https://pag.ae/7-ydEwR-v'}
+                  https://pag.ae/7-ydEwR-v
                 </Link>
-                {codeAccept && (
-                  <span className="font-bold">
-                    ATENÇÃO: esse link de pagamento é apenas para os
-                    participantes que realizaram a pré-inscrição
-                  </span>
-                )}
               </div>
 
               <div className="flex flex-col w-full text-center p-2">
@@ -628,17 +570,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                   </button>
                 </Tooltip>
                 <span className="font-semibold text-lg">
-                  e envie um PIX no valor de R${' '}
-                  {codeAccept ? '279,90' : '309,90'}
-                  {codeAccept && (
-                    <>
-                      <br />
-                      <span>
-                        ATENÇÃO: esse valor é apenas para os participantes que
-                        realizaram a pré-inscrição
-                      </span>
-                    </>
-                  )}
+                  e envie um PIX no valor de R$ 309,90
                 </span>
               </div>
 

@@ -12,7 +12,6 @@ import {
   MdAddCircle,
   MdRemoveCircle,
   MdOutlineCancel,
-  MdCheck,
   MdCheckCircle,
   MdOutlineCheckCircle,
 } from 'react-icons/md'
@@ -20,7 +19,6 @@ import { z } from 'zod'
 import { ErrorMessage } from '../error-message'
 import FormField from '../field'
 import { zodResolver } from '@hookform/resolvers/zod'
-// import { upload } from '@vercel/blob/client'
 import axios from 'axios'
 import { uploadFileSupabase } from '@/services'
 import TermsModal from '@/components/terms'
@@ -42,9 +40,6 @@ export function ServoForm(props: ServoFormProps) {
   const [openTermsModal, setOpenTermsModal] = useState(false)
   const [accept, setAccept] = useState(false)
 
-  const [code, setCode] = useState('')
-  const [codeLoading, setCodeLoading] = useState(false)
-  const [codeAccept, setCodeAccept] = useState(false)
   const [rg, setRg] = useState('')
 
   const servoForm = useForm<ServoFormData>({
@@ -58,9 +53,6 @@ export function ServoForm(props: ServoFormProps) {
   function handleClose() {
     clearErrors()
     reset()
-    setCode('')
-    setCodeLoading(false)
-    setCodeAccept(false)
     props.onClose()
   }
 
@@ -762,44 +754,6 @@ export function ServoForm(props: ServoFormProps) {
                 />
                 <ErrorMessage field="address" />
               </FormField>
-              <FormField>
-                <label htmlFor="code">Possui o código de pré-inscrito?</label>
-                <div className="flex gap-2">
-                  <input
-                    id="code"
-                    value={code}
-                    disabled={codeAccept}
-                    onChange={(e) => setCode(e.target.value.toUpperCase())}
-                    placeholder="Digite o código aqui"
-                    className="p-2 rounded-xl border border-zinc-600"
-                  />
-                  <button
-                    type="button"
-                    className="bg-red-600 disabled:bg-red-800 flex items-center justify-center gap-1 font-bold p-2 text-white rounded-xl"
-                    disabled={codeLoading || codeAccept}
-                    onClick={() => {
-                      setCodeLoading(true)
-                      axios
-                        .post('/api/registration/promotional-code', {
-                          promotional_code: code,
-                        })
-                        .then(() => {
-                          alert('Código promocional aplicado com sucesso')
-                          setCodeAccept(true)
-                        })
-                        .catch(() => {
-                          alert('Código promocional não encontrado')
-                          setCodeAccept(false)
-                        })
-                        .finally(() => setCodeLoading(false))
-                    }}
-                  >
-                    {codeLoading && <Loadding />}
-                    {codeAccept && <MdCheck />}
-                    {codeAccept ? 'Código aplicado' : 'Enviar código'}
-                  </button>
-                </div>
-              </FormField>
             </div>
 
             <div className="flex flex-col w-full text-center p-2">
@@ -808,24 +762,12 @@ export function ServoForm(props: ServoFormProps) {
                 OU PIX, ACESSE O LINK:
               </span>
               <Link
-                href={
-                  codeAccept
-                    ? 'https://pag.ae/7-ydJYysQ'
-                    : 'https://pag.ae/7-ydHjDX9'
-                }
+                href="https://pag.ae/7-ydHjDX9"
                 target="_blank"
                 className="text-blue-600 font-bold text-lg"
               >
-                {codeAccept
-                  ? 'https://pag.ae/7-ydJYysQ'
-                  : 'https://pag.ae/7-ydHjDX9'}
+                https://pag.ae/7-ydHjDX9
               </Link>
-              {codeAccept && (
-                <span className="font-bold">
-                  ATENÇÃO: esse link de pagamento é apenas para os servos que
-                  realizaram a pré-inscrição
-                </span>
-              )}
             </div>
             <div className="flex flex-col w-full text-center p-2">
               <span className="font-bold text-xl">
@@ -846,16 +788,7 @@ export function ServoForm(props: ServoFormProps) {
                 </button>
               </Tooltip>
               <span className="font-semibold text-lg">
-                e envie um PIX no valor de R$ {codeAccept ? '179,90' : '209,90'}
-                {codeAccept && (
-                  <>
-                    <br />
-                    <span>
-                      ATENÇÃO: esse valor é apenas para os servos que realizaram
-                      a pré-inscrição
-                    </span>
-                  </>
-                )}
+                e envie um PIX no valor de R$ 209,90
               </span>
             </div>
 
