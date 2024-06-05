@@ -5,7 +5,7 @@ export async function getAllServants() {
     where: {
       servant: true,
     },
-    orderBy: [{ name: 'asc' }, { birthdate: 'asc' }],
+    orderBy: [{ createdAt: 'desc' }],
   })
 
   return servants
