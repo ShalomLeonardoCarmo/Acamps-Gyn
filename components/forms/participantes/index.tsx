@@ -8,6 +8,7 @@ import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { GiCampingTent } from 'react-icons/gi'
 import {
   MdAddCircle,
+  MdCheck,
   MdCheckCircle,
   MdDownload,
   MdOutlineCancel,
@@ -32,9 +33,27 @@ export interface ParticipanteFormProps {
 export type ParticipanteFormData = z.infer<typeof participanteFormSchema>
 
 export function ParticipanteForm(props: ParticipanteFormProps) {
+  const now = new Date()
+  const day = now.getDate()
+  const month = now.getMonth()
+  const hour = now.getHours()
+
+  const promotionalCode: boolean =
+    month === 5 &&
+    ((day === 7 && hour >= 18) || // CONSOLODOSSOLTEIROSACAMPS First Day
+      day === 8 || // CONSOLODOSSOLTEIROSACAMPS Second day
+      (day === 9 && hour < 18) || // CONSOLODOSSOLTEIROSACAMPS Third day
+      (day === 12 && hour >= 8) || // EU&MEUAMORNOACAMPS Firts day
+      day === 13 || // EU&MEUAMORNOACAMPS Second day
+      (day === 14 && hour <= 8)) // EU&MEUAMORNOACAMPS Third day
+
   const inputRgFrontRef = useRef<HTMLInputElement>(null)
   const inputRgBackRef = useRef<HTMLInputElement>(null)
   const inputPaymentRef = useRef<HTMLInputElement>(null)
+
+  const [code, setCode] = useState('')
+  const [codeLoading, setCodeLoading] = useState(false)
+  const [codeAccept, setCodeAccept] = useState(false)
 
   const [responsible, setResponsible] = useState(false)
   const [openTermsModal, setOpenTermsModal] = useState(false)
@@ -99,13 +118,13 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
   const {
     formState: { isSubmitting },
     handleSubmit,
-    register,
-    watch,
-    setValue,
-    getValues,
-    control,
     clearErrors,
+    getValues,
+    register,
+    setValue,
+    control,
     reset,
+    watch,
   } = participanteForm
 
   const watchMedication = watch('frequentlly_use_medication')
@@ -118,11 +137,14 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
   })
 
   function handleClose() {
-    clearErrors()
     setOpenTermsModal(false)
+    setCodeLoading(false)
+    setCodeAccept(false)
     setAccept(false)
-    reset()
+    clearErrors()
+    setCode('')
     setRg('')
+    reset()
     props.onClose()
   }
 
@@ -536,6 +558,48 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                   />
                   <ErrorMessage field="address" />
                 </FormField>
+                {promotionalCode && (
+                  <FormField>
+                    <label htmlFor="code">
+                      Possui o código de pré-inscrito?
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        id="code"
+                        value={code}
+                        disabled={codeAccept}
+                        onChange={(e) => setCode(e.target.value.toUpperCase())}
+                        placeholder="Digite o código aqui"
+                        className="p-2 rounded-xl border border-zinc-600"
+                      />
+                      <button
+                        type="button"
+                        className="bg-red-600 disabled:bg-red-800 flex items-center justify-center gap-1 font-bold p-2 text-white rounded-xl"
+                        disabled={codeLoading || codeAccept}
+                        onClick={() => {
+                          setCodeLoading(true)
+                          axios
+                            .post('/api/registration/promotional-code', {
+                              promotional_code: code,
+                            })
+                            .then(() => {
+                              alert('Código promocional aplicado com sucesso')
+                              setCodeAccept(true)
+                            })
+                            .catch(() => {
+                              alert('Código promocional não encontrado')
+                              setCodeAccept(false)
+                            })
+                            .finally(() => setCodeLoading(false))
+                        }}
+                      >
+                        {codeLoading && <Loadding />}
+                        {codeAccept && <MdCheck />}
+                        {codeAccept ? 'Código aplicado' : 'Enviar código'}
+                      </button>
+                    </div>
+                  </FormField>
+                )}
               </div>
 
               <div className="flex flex-col w-full text-center p-2">
@@ -544,12 +608,24 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                   BANCÁRIO OU PIX, ACESSE O LINK:
                 </span>
                 <Link
-                  href="https://pag.ae/7-ydEwR-v"
+                  href={
+                    codeAccept && promotionalCode
+                      ? 'https://pag.ae/7-srkQQeu'
+                      : 'https://pag.ae/7-ydEwR-v'
+                  }
                   target="_blank"
                   className="text-blue-600 font-bold text-lg"
                 >
-                  https://pag.ae/7-ydEwR-v
+                  {codeAccept && promotionalCode
+                    ? 'https://pag.ae/7-srkQQeu'
+                    : 'https://pag.ae/7-ydEwR-v'}
                 </Link>
+                {codeAccept && (
+                  <span className="font-bold">
+                    ATENÇÃO: esse link de pagamento é apenas para os
+                    participantes que utilizaram o código promocional
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-col w-full text-center p-2">
@@ -571,7 +647,17 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                   </button>
                 </Tooltip>
                 <span className="font-semibold text-lg">
-                  e envie um PIX no valor de R$ 309,90
+                  e envie um PIX no valor de R${' '}
+                  {codeAccept && promotionalCode ? '289,90' : '309,90'}
+                  {codeAccept && (
+                    <>
+                      <br />
+                      <span>
+                        ATENÇÃO: esse valor é apenas para os participantes que
+                        utilizaram o código promocional
+                      </span>
+                    </>
+                  )}
                 </span>
               </div>
 

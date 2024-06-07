@@ -68,6 +68,7 @@ model dev_registrations {
 model promotional_codes {
   id         Int          @id @default(autoincrement())
   code       String       @unique
+  status     Boolean      @default(true)
   used_codes used_codes[]
 }
 
