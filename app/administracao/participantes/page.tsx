@@ -24,7 +24,7 @@ export default function ParticipantesPage() {
   }, [])
 
   return (
-    <main className="flex flex-1 items-center justify-center p-2">
+    <main className="flex flex-1 items-center justify-center p-2 max-w-full overflow-auto">
       <table className="bg-red-600 w-full divide-y max-w-screen-sm md:max-w-screen-lg rounded-xl shadow-lg">
         <thead className="text-center text-yellow-200 font-bold text-lg">
           <tr>
@@ -32,6 +32,7 @@ export default function ParticipantesPage() {
             <th>Nome</th>
             <th>Responsável</th>
             <th>Data de Nascimento</th>
+            <th>Comprovante de pagamento</th>
           </tr>
         </thead>
         <tbody className="text-center text-white font-semibold divide-y">
@@ -45,6 +46,9 @@ export default function ParticipantesPage() {
               <td>{row.name}</td>
               <td>{`${row.responsible_contact.number} (${row.responsible_contact.name})`}</td>
               <td>{formatDate(row.birthdate)}</td>
+              <td>
+                <Link href={`${row.payment}`}>Clique aqui</Link>
+              </td>
             </tr>
           ))}
         </tbody>
