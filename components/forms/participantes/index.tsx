@@ -611,14 +611,14 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                   href={
                     codeAccept && promotionalCode
                       ? 'https://pag.ae/7-srkQQeu'
-                      : 'https://pag.ae/7-ydEwR-v'
+                      : 'https://pag.ae/7-DTCtk-r'
                   }
                   target="_blank"
                   className="text-blue-600 font-bold text-lg"
                 >
                   {codeAccept && promotionalCode
                     ? 'https://pag.ae/7-srkQQeu'
-                    : 'https://pag.ae/7-ydEwR-v'}
+                    : 'https://pag.ae/7-DTCtk-r'}
                 </Link>
                 {codeAccept && (
                   <span className="font-bold">
@@ -648,7 +648,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
                 </Tooltip>
                 <span className="font-semibold text-lg">
                   e envie um PIX no valor de R${' '}
-                  {codeAccept && promotionalCode ? '289,90' : '309,90'}
+                  {codeAccept && promotionalCode ? '289,90' : '349,90'}
                   {codeAccept && (
                     <>
                       <br />

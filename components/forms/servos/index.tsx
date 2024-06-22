@@ -762,11 +762,11 @@ export function ServoForm(props: ServoFormProps) {
                 OU PIX, ACESSE O LINK:
               </span>
               <Link
-                href="https://pag.ae/7-ydHjDX9"
+                href="https://pag.ae/7-DTDsTCH"
                 target="_blank"
                 className="text-blue-600 font-bold text-lg"
               >
-                https://pag.ae/7-ydHjDX9
+                https://pag.ae/7-DTDsTCH
               </Link>
             </div>
             <div className="flex flex-col w-full text-center p-2">
@@ -788,7 +788,7 @@ export function ServoForm(props: ServoFormProps) {
                 </button>
               </Tooltip>
               <span className="font-semibold text-lg">
-                e envie um PIX no valor de R$ 209,90
+                e envie um PIX no valor de R$ 229,90
               </span>
             </div>
 
