@@ -24,7 +24,7 @@ export default function ParticipantesPage() {
   }, [])
 
   return (
-    <main className="flex flex-1 items-center justify-center p-2">
+    <main className="flex md:justify-center overflow-auto p-2">
       <table className="bg-red-600 w-full divide-y max-w-screen-sm md:max-w-screen-lg rounded-xl shadow-lg">
         <thead className="text-center text-yellow-200 font-bold text-lg">
           <tr>
