@@ -47,7 +47,9 @@ export default function ParticipantesPage() {
               <td>{`${row.responsible_contact.number} (${row.responsible_contact.name})`}</td>
               <td>{formatDate(row.birthdate)}</td>
               <td>
-                <Link href={`${row.payment}`}>Clique aqui</Link>
+                <Link target="_blank" href={`${row.payment}`}>
+                  Clique aqui
+                </Link>
               </td>
             </tr>
           ))}
