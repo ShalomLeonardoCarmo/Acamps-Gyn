@@ -57,12 +57,12 @@ export default function ParticipantesPage() {
         <tfoot className="text-center text-white">
           <tr>
             {isLoading && (
-              <td colSpan={4} className="p-2">
+              <td colSpan={5} className="p-2">
                 Carregando...
               </td>
             )}
             {!isLoading && participants.length && (
-              <td colSpan={4} align="center" className="p-2">
+              <td colSpan={5} align="center" className="p-2">
                 Total: {participants.length} participantes
               </td>
             )}
