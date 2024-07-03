@@ -36,16 +36,8 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
   const now = new Date()
   const day = now.getDate()
   const month = now.getMonth()
-  const hour = now.getHours()
 
-  const promotionalCode: boolean =
-    month === 5 &&
-    ((day === 7 && hour >= 18) || // CONSOLODOSSOLTEIROSACAMPS First Day
-      day === 8 || // CONSOLODOSSOLTEIROSACAMPS Second day
-      (day === 9 && hour < 18) || // CONSOLODOSSOLTEIROSACAMPS Third day
-      (day === 12 && hour >= 8) || // EU&MEUAMORNOACAMPS Firts day
-      day === 13 || // EU&MEUAMORNOACAMPS Second day
-      (day === 14 && hour <= 8)) // EU&MEUAMORNOACAMPS Third day
+  const promotionalCode: boolean = month === 6 && day > 3 && day < 8 // EU&MEUAMIGOACAMPS Third day
 
   const inputRgFrontRef = useRef<HTMLInputElement>(null)
   const inputRgBackRef = useRef<HTMLInputElement>(null)
@@ -222,12 +214,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
               <br />
               Vocês não podem perder!!
               <br />
-              <br />
-              📣 Inscrições oficialmente abertas e o 1° lote vai até 21/05 ou
-              até terminarem as vagas (são só 10 ein).
-              <br />
-              <br />
-              Corre e garanta sua vaga nessa aventura dos melhores dias da sua
+              Corra e garanta sua vaga nessa aventura dos melhores dias da sua
               vida. Vagas limitadas.
               <br />
               <br />
