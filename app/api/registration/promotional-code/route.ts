@@ -16,17 +16,8 @@ export async function POST(request: Request): Promise<NextResponse> {
   const now = new Date()
   const day = now.getDate()
   const month = now.getMonth()
-  const hour = now.getHours()
 
-  const isValid: boolean =
-  // Check singles code
-    month === 5 &&
-    ((((day === 7 && hour >= 18) || (day === 8 ) || (day === 9 && hour < 18))
-    && promotionalCode?.code === 'CONSOLODOSSOLTEIROSACAMPS')
-    ||  
-  // Check boyfriends code
-    (((day === 12 && hour >= 8) || (day === 13 ) || (day === 14 && hour <= 8))
-    && promotionalCode?.code === 'EU&MEUAMORNOACAMPS'))
+  const isValid: boolean = month === 6 && day > 3 && day < 8 && promotionalCode?.code === 'EU&MEUAMIGOACAMPS'
 
   return promotionalCode && isValid
     ? NextResponse.json(
