@@ -1,15 +1,18 @@
-'use client'
-
+import { ParticipantFormButton } from '@/components/button/participant-form-button'
+import { ServantFormButton } from '@/components/button/servant-form-button'
 import { ParticipanteForm } from '@/components/forms/participantes'
 import { ServoForm } from '@/components/forms/servos'
-import { useRouter } from 'next/navigation'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Inscrição • Acamp's Gyn",
+}
 
 export default function InscricaoPage({
   searchParams,
 }: {
   searchParams?: { form?: string }
 }) {
-  const { push } = useRouter()
   const openParticipante = searchParams?.form === 'participant'
   const openServo = searchParams?.form === 'servant'
 
@@ -23,13 +26,7 @@ export default function InscricaoPage({
         <span className="flex justify-center font-semibold w-full">
           Venha viver as melhores férias da sua vida!
         </span>
-
-        <button
-          onClick={() => push('/inscricao?form=participant')}
-          className="font-bold p-2 w-full bg-orange-400 text-white rounded-xl shadow-sm hover:bg-red-600 transition-all hover:shadow-xl"
-        >
-          CLIQUE AQUI!
-        </button>
+        <ParticipantFormButton />
       </section>
 
       <section className="flex flex-col mt-4 text-center max-w-screen-sm">
@@ -40,21 +37,12 @@ export default function InscricaoPage({
           É no serviço que transbordamos o amor de Deus por nós. Vem ajudar os
           irmãos a terem sua experiência com Deus também!
         </span>
-
-        <button
-          onClick={() => push('/inscricao?form=servant')}
-          className="font-bold p-2 bg-orange-400 text-white rounded-xl shadow-sm hover:bg-red-600 transition-all hover:shadow-xl"
-        >
-          CLIQUE AQUI!
-        </button>
+        <ServantFormButton />
       </section>
 
-      <ParticipanteForm
-        onClose={() => push('/inscricao')}
-        show={openParticipante}
-      />
+      <ParticipanteForm show={openParticipante} />
 
-      <ServoForm onClose={() => push('/inscricao')} show={openServo} />
+      <ServoForm show={openServo} />
 
       <div className="flex flex-col gap-3 mt-2">
         <span>

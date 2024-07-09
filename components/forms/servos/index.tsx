@@ -22,15 +22,16 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { uploadFileSupabase } from '@/services'
 import TermsModal from '@/components/terms'
+import { useRouter } from 'next/navigation'
 
 export interface ServoFormProps {
   show: boolean
-  onClose: () => void
 }
 
 export type ServoFormData = z.infer<typeof servoFormSchema>
 
 export function ServoForm(props: ServoFormProps) {
+  const { push } = useRouter()
   const inputRgFrontRef = useRef<HTMLInputElement>(null)
   const inputRgBackRef = useRef<HTMLInputElement>(null)
   const inputPaymentRef = useRef<HTMLInputElement>(null)
@@ -53,7 +54,7 @@ export function ServoForm(props: ServoFormProps) {
   function handleClose() {
     clearErrors()
     reset()
-    props.onClose()
+    push('/inscricao')
   }
 
   async function submit(formData: ServoFormData) {
@@ -95,7 +96,7 @@ export function ServoForm(props: ServoFormProps) {
         setRg('')
         reset()
         setHabilities(false)
-        props.onClose()
+        push('/inscricao')
       })
       .catch((error) => {
         alert(
@@ -171,7 +172,7 @@ export function ServoForm(props: ServoFormProps) {
   }, [getValues, watchBirthdate])
 
   return (
-    <Modal onClose={props.onClose} open={props.show}>
+    <Modal onClose={() => push('/inscricao')} open={props.show}>
       <div className="bg-red-50 overflow-auto max-h-[90vh] divide-y rounded-xl w-full max-w-[95vw] md:max-w-[730px] lg:max-w-[1000px]">
         <div className="flex flex-col text-center font-semibold p-2">
           <span className="font-bold text-lg">Formulário de inscrição</span>

@@ -24,15 +24,16 @@ import Link from 'next/link'
 import Tooltip from '@/components/tootlip'
 import { uploadFileSupabase } from '@/services'
 import TermsModal from '@/components/terms'
+import { useRouter } from 'next/navigation'
 
 export interface ParticipanteFormProps {
   show: boolean
-  onClose: () => void
 }
 
 export type ParticipanteFormData = z.infer<typeof participanteFormSchema>
 
 export function ParticipanteForm(props: ParticipanteFormProps) {
+  const { push } = useRouter()
   const now = new Date()
   const day = now.getDate()
   const month = now.getMonth()
@@ -97,7 +98,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
         alert('Inscrição realizada com sucesso')
         setRg('')
         reset()
-        props.onClose()
+        push('/inscricao')
       })
       .catch((error) => {
         alert(
@@ -137,7 +138,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
     setCode('')
     setRg('')
     reset()
-    props.onClose()
+    push('/inscricao')
   }
 
   useEffect(() => {
@@ -186,7 +187,7 @@ export function ParticipanteForm(props: ParticipanteFormProps) {
 
   return (
     <>
-      <Modal onClose={props.onClose} open={props.show}>
+      <Modal onClose={() => push('/inscricao')} open={props.show}>
         <div className="bg-red-50 overflow-auto max-h-[90vh] divide-y rounded-xl w-full max-w-[95vw] md:max-w-[730px] lg:max-w-[1000px]">
           <div className="flex flex-col text-center font-semibold p-2">
             <span className="font-bold text-lg">Formulário de inscrição</span>
