@@ -2,11 +2,16 @@
 
 import { ParticipanteForm } from '@/components/forms/participantes'
 import { ServoForm } from '@/components/forms/servos'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
-export default function InscricaoPage() {
-  const [openParticipante, setOpenParticipante] = useState(false)
-  const [openServo, setOpenServo] = useState(false)
+export default function InscricaoPage({
+  searchParams,
+}: {
+  searchParams?: { form?: string }
+}) {
+  const { push } = useRouter()
+  const openParticipante = searchParams?.form === 'participant'
+  const openServo = searchParams?.form === 'servant'
 
   return (
     <main className="flex flex-col items-center gap-4 p-2">
@@ -20,7 +25,7 @@ export default function InscricaoPage() {
         </span>
 
         <button
-          onClick={() => setOpenParticipante(true)}
+          onClick={() => push('/inscricao?form=participant')}
           className="font-bold p-2 w-full bg-orange-400 text-white rounded-xl shadow-sm hover:bg-red-600 transition-all hover:shadow-xl"
         >
           CLIQUE AQUI!
@@ -37,7 +42,7 @@ export default function InscricaoPage() {
         </span>
 
         <button
-          onClick={() => setOpenServo(true)}
+          onClick={() => push('/inscricao?form=servant')}
           className="font-bold p-2 bg-orange-400 text-white rounded-xl shadow-sm hover:bg-red-600 transition-all hover:shadow-xl"
         >
           CLIQUE AQUI!
@@ -45,11 +50,11 @@ export default function InscricaoPage() {
       </section>
 
       <ParticipanteForm
-        onClose={() => setOpenParticipante(false)}
+        onClose={() => push('/inscricao')}
         show={openParticipante}
       />
 
-      <ServoForm onClose={() => setOpenServo(false)} show={openServo} />
+      <ServoForm onClose={() => push('/inscricao')} show={openServo} />
 
       <div className="flex flex-col gap-3 mt-2">
         <span>
