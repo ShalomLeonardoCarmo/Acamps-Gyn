@@ -1,28 +1,10 @@
 'use client'
 
-import Loadding from '@/components/loadding'
 import Modal from '@/components/modal'
-import Tooltip from '@/components/tootlip'
 import { servoFormSchema } from '@/validation/servo-form'
-import Link from 'next/link'
-import { Fragment, useEffect, useRef, useState } from 'react'
-import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
-import { GiCampingTent } from 'react-icons/gi'
-import {
-  MdAddCircle,
-  MdRemoveCircle,
-  MdOutlineCancel,
-  MdCheckCircle,
-  MdOutlineCheckCircle,
-} from 'react-icons/md'
 import { z } from 'zod'
-import { ErrorMessage } from '../error-message'
-import FormField from '../field'
-import { zodResolver } from '@hookform/resolvers/zod'
-import axios from 'axios'
-import { uploadFileSupabase } from '@/services'
-import TermsModal from '@/components/terms'
 import { useRouter } from 'next/navigation'
+import { MdOutlineCancel } from 'react-icons/md'
 
 export interface ServoFormProps {
   show: boolean
@@ -32,144 +14,6 @@ export type ServoFormData = z.infer<typeof servoFormSchema>
 
 export function ServoForm(props: ServoFormProps) {
   const { push } = useRouter()
-  const inputRgFrontRef = useRef<HTMLInputElement>(null)
-  const inputRgBackRef = useRef<HTMLInputElement>(null)
-  const inputPaymentRef = useRef<HTMLInputElement>(null)
-  const [habilities, setHabilities] = useState(false)
-
-  const [responsible, setResponsible] = useState(false)
-  const [openTermsModal, setOpenTermsModal] = useState(false)
-  const [accept, setAccept] = useState(false)
-
-  const [rg, setRg] = useState('')
-
-  const servoForm = useForm<ServoFormData>({
-    resolver: zodResolver(servoFormSchema),
-    defaultValues: {
-      wich_city: 4,
-      city_name: '',
-    },
-  })
-
-  function handleClose() {
-    clearErrors()
-    reset()
-    push('/inscricao')
-  }
-
-  async function submit(formData: ServoFormData) {
-    if (!inputRgBackRef.current?.files) {
-      return alert('Insira a foto do RG (verso)')
-    }
-    if (!inputRgFrontRef.current?.files) {
-      return alert('Insira a foto do RG (frente)')
-    }
-    if (!inputPaymentRef.current?.files) {
-      return alert('Insira o comprovante de pagamento')
-    }
-
-    const rgFrontFile = inputRgFrontRef.current.files[0]
-    const rgBackFile = inputRgBackRef.current.files[0]
-    const paymentFile = inputPaymentRef.current.files[0]
-
-    const rgFrontData = await uploadFileSupabase(
-      rgFrontFile,
-      `rg - frente/${getValues('general_registration')}-front.${rgFrontFile.name.split('.').pop()}`,
-    )
-    const rgBackData = await uploadFileSupabase(
-      rgBackFile,
-      `rg - verso/${getValues('general_registration')}-back.${rgBackFile.name.split('.').pop()}`,
-    )
-    const paymentData = await uploadFileSupabase(
-      paymentFile,
-      `pagamento/${getValues('general_registration')}-payment.${paymentFile.name.split('.').pop()}`,
-    )
-
-    formData.general_registration_back = rgBackData
-    formData.general_registration_front = rgFrontData
-    formData.payment = paymentData
-
-    axios
-      .post('/api/database/create-servant', formData)
-      .then(() => {
-        alert('Inscrição realizada com sucesso')
-        setRg('')
-        reset()
-        setHabilities(false)
-        push('/inscricao')
-      })
-      .catch((error) => {
-        alert(
-          'Erro ao realizar inscrição. Confira se todos os campos foram preenchidos',
-        )
-        console.error(error)
-      })
-  }
-
-  const {
-    formState: { isSubmitting },
-    handleSubmit,
-    register,
-    watch,
-    setValue,
-    getValues,
-    control,
-    clearErrors,
-    reset,
-  } = servoForm
-
-  const watchMedication = watch('frequentlly_use_medication')
-  const watchWichCity = watch('wich_city')
-  const watchBirthdate = watch('birthdate')
-
-  const { fields, append, remove } = useFieldArray({
-    name: 'wich_medication',
-    control,
-  })
-
-  useEffect(() => {
-    if (watchMedication && fields.length === 0) {
-      append({ frequency: '', medication_name: '' })
-    } else if (!watchMedication && fields.length > 0) {
-      remove()
-    }
-  }, [append, fields.length, remove, watchMedication])
-
-  useEffect(() => {
-    const birthdate = getValues('birthdate').split('-')
-    if (birthdate.length === 3) {
-      const time = Date.now()
-      const now = new Date(time)
-      const year = now.getFullYear()
-      const month = now.getMonth() + 1
-      const day = now.getDate()
-      const bYear = Number(birthdate[0])
-      const bMonth = Number(birthdate[1])
-      const bDay = Number(birthdate[2])
-
-      if (bYear > 1900) {
-        if (year - bYear > 18) {
-          setResponsible(true)
-        } else if (year - bYear === 18) {
-          if (month > bMonth) {
-            console.log('Sim')
-            setResponsible(true)
-          } else if (month === bMonth) {
-            if (day >= bDay) {
-              setResponsible(true)
-            } else {
-              setResponsible(false)
-            }
-          } else {
-            console.log('Sim 3')
-            setResponsible(false)
-          }
-        } else {
-          setResponsible(false)
-        }
-      }
-    }
-  }, [getValues, watchBirthdate])
 
   return (
     <Modal onClose={() => push('/inscricao')} open={props.show}>
@@ -213,7 +57,7 @@ export function ServoForm(props: ServoFormProps) {
           </span>
         </div> */}
 
-        <FormProvider {...servoForm}>
+        {/* <FormProvider {...servoForm}>
           <form
             className="divide-y accent-red-600"
             onSubmit={handleSubmit(submit)}
@@ -859,7 +703,28 @@ export function ServoForm(props: ServoFormProps) {
               </button>
             </div>
           </form>
-        </FormProvider>
+        </FormProvider> */}
+        <span className="text-center text-lg font-bold w-full flex">
+          Infelizmente o período de inscrições foi encerrado. Mas fica de olho
+          nas nossas redes sociais e se liga nos próximos eventos!
+        </span>
+        <div className="flex gap-2 p-2 w-full items-center justify-center">
+          <button
+            type="button"
+            onClick={() => push('/inscricao')}
+            className="
+              border border-red-500 flex items-center
+              justify-center gap-2 p-2 font-semibold text-red-600 rounded-xl
+              transition-all
+              hover:bg-red-600
+              hover:text-yellow-200
+              hover:bg-opacity-90
+            "
+          >
+            <MdOutlineCancel size={25} />
+            FECHAR
+          </button>
+        </div>
       </div>
     </Modal>
   )

@@ -1,6 +1,11 @@
+import { Metadata } from 'next'
 import Link from 'next/link'
 import { BsInstagram } from 'react-icons/bs'
 import { MdMail, MdPlace, MdWhatsapp } from 'react-icons/md'
+
+export const metadata: Metadata = {
+  title: "Contato • Acamps's Gyn",
+}
 
 export default function ContactPage() {
   return (
